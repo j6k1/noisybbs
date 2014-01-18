@@ -369,8 +369,32 @@
 				return $ret;
 			}
 			
-			if(isset($_POST["FROM"])) setcookie("FROM", $_POST["FROM"], time()+3600*24*30);
-			if(isset($_POST["mail"])) setcookie("mail", $_POST["mail"], time()+3600*24*30);
+			$setting = SettingInfo::getInstance();
+
+			$php_mode = (($setting->BBS_READ_SCRIPT != null) && 
+				$setting->BBS_READ_SCRIPT == "php") ? true : false;
+			if($php_mode) { $ext = "cgi"; } else { $ext = "html"; }
+
+			if(isset($_SERVER["REQUEST_URI"]))
+			{
+				$path = preg_replace('#/bbs\.cgi.*$#', sprintf('/read.%s/%s', $ext, $setting->bbs), 
+					parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
+			}
+			else
+			{
+				$path = null;
+			}
+			
+			if(isset($path))
+			{
+				if(isset($_POST["FROM"])) setcookie("FROM", $_POST["FROM"], time()+3600*24*30, $path);
+				if(isset($_POST["mail"])) setcookie("mail", $_POST["mail"], time()+3600*24*30, $path);
+			}
+			else
+			{
+				if(isset($_POST["FROM"])) setcookie("FROM", $_POST["FROM"], time()+3600*24*30);
+				if(isset($_POST["mail"])) setcookie("mail", $_POST["mail"], time()+3600*24*30);
+			}
 			
 			if( ($this->hostinfo->is_cookie_id) && (!isset($_COOKIE['uniqid'])) )
 			{
@@ -379,11 +403,17 @@
 				{
 					$year = date("Y") + 1;
 					$expire = strtotime(sprintf("%04d", $year). date("-m-d"));
-					setcookie('uniqid', $this->hostinfo->uniqno, $expire);
+					if(isset($path))
+					{
+						setcookie('uniqid', $this->hostinfo->uniqno, $expire, $path);
+					}
+					else
+					{
+						setcookie('uniqid', $this->hostinfo->uniqno, $expire);
+					}
 				}
 			}
 			
-			$setting = SettingInfo::getInstance();
 			if($ret >= $setting->RES_MAX)
 			{
 				$maxres_msg = Util::msgbody_escape($setting->maxres_msg);
