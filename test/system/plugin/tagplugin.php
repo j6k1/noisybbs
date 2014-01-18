@@ -229,6 +229,8 @@
 					return "";
 				}
 			}
+			
+			return $match[0];
 		}
 		
 		function removeJSEvent($tagbody)
