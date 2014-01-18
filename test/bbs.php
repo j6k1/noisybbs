@@ -464,6 +464,17 @@ EOM;
 			header("Content-type: text/html; charset=\"shift-jis\"");
 			if($this->hostinfo->carrier === null)
 			{
+				if(isset($this->writeinfo))
+				{
+					$name = $this->writeinfo->name;
+					$mail = $this->writeinfo->mail;
+				}
+				else
+				{
+					$name = $_POST["FROM"];
+					$mail = $_POST["mail"] ;
+				}
+				
 				$html = <<<EOM
 
 <html>
@@ -474,7 +485,7 @@ EOM;
 <!-- 2ch_X:error --><!--nobanner-->
 <font size=+1 color=#FF0000><b>ＥＲＲＯＲ：{$errinfo->errhead}</b>
 </font><ul><br>ホスト<b>{$this->hostinfo->hostname}</b><br>
-<b> </b><br>名前： {$this->writeinfo->name}<br>E-mail： {$this->writeinfo->mail}<br>内容：{$errinfo->errhead}<br>
+<b> </b><br>名前： {$name}<br>E-mail： {$mail}<br>内容：{$errinfo->errhead}<br>
 {$errinfo->usrmsg}<br>{$sysmsg}</ul><small>こちらでリロードしてください。
 <a href="{$rooturl}/{$setting->bbs}/"> GO! </a><hr>
 <div align=right></div></small></body></html>
