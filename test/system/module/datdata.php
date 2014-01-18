@@ -75,7 +75,9 @@
 			}
 			
 			$this->datname = "../{$setting->bbs}/dat/{$threkey}.dat";
-
+			
+			$subject = "";
+			
 			if(isset($writeinfo->subject))
 			{
 				$subject = Util::datspecialchars($subject);
