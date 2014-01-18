@@ -62,7 +62,7 @@
 		<div id="capcreate">
 			<div class="head">キャップ作成</div>
 			<div class="space"></div>
-			<div><a href="{$baseurl}/admin/capcreate.php">キャップ作成ページへ</a></div>
+			<div><a href="<?php echo $baseurl; ?>/admin/capcreate.php">キャップ作成ページへ</a></div>
 			<div class="line"></div>
 		</div>
 		<div id="capselect">

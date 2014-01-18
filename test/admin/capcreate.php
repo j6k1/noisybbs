@@ -106,7 +106,7 @@
 				<?php echo $form->ErrMessage("pass1", "<div class='errmsg'>0-9a-zA-Z_-のいずれかの文字のみで、8～16文字で設定してください。</div>"); ?>
 				<div class="head"><b>管理パスワード(再入力)</b></div>
 				<div class="text""><?php echo $form->Password("pass2"); ?></div>
-				<?php if($passcmperr) { echo "<div class='errmsg'>パスワードが正しく再入力されていません。</div>"; } ?> 
+				<?php if(isset($passcmperr) && $passcmperr) { echo "<div class='errmsg'>パスワードが正しく再入力されていません。</div>"; } ?> 
 				<div id="submit"><input type="submit" value="作成" /></div>
 				
 			</form>
