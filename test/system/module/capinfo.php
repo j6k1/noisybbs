@@ -17,7 +17,7 @@
 		{
 			$capdatas = CapList::getInstance();
 
-			if(!isset($capdatas->data[$cappass]))
+			if(!isset($cappass) || !isset($capdatas->data[$cappass]))
 			{
 				return false;
 			}

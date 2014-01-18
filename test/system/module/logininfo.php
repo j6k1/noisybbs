@@ -23,7 +23,7 @@
 			}
 			
 			$this->aclmode = $_SESSION["aclmode"];
-			$this->cappass = $_SESSION["cappass"];
+			$this->cappass = isset($_SESSION["cappass"]) ? $_SESSION["cappass"] : null;
 			
 			return true;
 		}

@@ -510,5 +510,8 @@ function init()
 	threadinfo.thread = pathinfo[2];
 	threadinfo.option = decodeURIComponent(pathinfo[3]);
 	
+	document.getElementById("name").value = Cookie.get("FROM");
+	document.getElementById("e-mail").value = Cookie.get("mail");
+	
 	threadinfo.ajax_getdat(true);
 }
