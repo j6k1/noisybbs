@@ -368,6 +368,9 @@
 				return $ret;
 			}
 			
+			if(isset($_POST["FROM"])) setcookie("FROM", $_POST["FROM"], time()+3600*24*30);
+			if(isset($_POST["mail"])) setcookie("mail", $_POST["mail"], time()+3600*24*30);
+			
 			if( ($this->hostinfo->is_cookie_id) && (!isset($_COOKIE['uniqid'])) )
 			{
 				if( (isset($this->hostinfo->uniqno)) && 
