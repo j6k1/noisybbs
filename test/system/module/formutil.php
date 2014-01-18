@@ -573,6 +573,7 @@ EOM;
 		function CheckBox($key, $val, $options = null)
 		{
 			$val = Util::adminhtmlspecialchars($val);
+			$html = "";
 			if(is_array($this->elements[$key]->val))
 			{
 				$html .= <<<EOM
