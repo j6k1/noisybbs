@@ -101,7 +101,7 @@
 		
 		foreach($plugins as $classname)
 		{
-			if(!in_array($classname, $pluginlist))
+			if(!array_key_exists($classname, $pluginlist))
 			{
 				AdminUtil::OutPutErrHtml("未定義のプラグインクラス名{$classname}が指定されました。", "{$baseurl}/admin/login.php");
 				exit;
