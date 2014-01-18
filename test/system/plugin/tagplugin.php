@@ -149,7 +149,8 @@
 										 1 + strlen($lastelm["name"]), 
 										 strlen($elmvalue) - 2 - strlen($lastelm["name"])
 									);
-									$elm = Util::bbshtmlspecialchars($this->removeJSEvent($elm));
+									$elm = $this->removeCssID($elm);
+									$elm = strtr($this->removeJSEvent($elm), array("<" => "&lt;", ">" => "&gt;"));
 									$blocks[$lastelm["index"]] = "<{$lastelm['name']}{$elm}>";
 									$blocks[$index++] = $match[0][0];
 								}
@@ -203,6 +204,31 @@
 			$writedata->MESSAGE = implode("", $blocks);
 				
 			return true;
+		}
+		
+		function removeCssID($tagbody)
+		{
+			$regexp = "((?:(\\s*)([^='\"\\>\\<\\s]+)(?:\\s*=\\s*)";
+			$regexp .= "(?:({$this->stringreg_dquoets}|{$this->stringreg_squoets})|";
+			$regexp .= "(?:[^\\s/]+))))|";
+			$regexp .= "({$this->stringreg_dquoets}|{$this->stringreg_squoets})|";
+			$regexp .= "(\\s*[^'\"\\>\\<\\s]\\s*)";
+			
+			return preg_replace_callback(
+				"#{$regexp}#",
+				array($this, "removeCssIDInner"),
+				$tagbody);
+		}
+		
+		function removeCssIDInner($match)
+		{
+			if(!Util::EmptyString($match[3]))
+			{
+				if(preg_match('/^[iI][dD]/', $match[3]))
+				{
+					return "";
+				}
+			}
 		}
 		
 		function removeJSEvent($tagbody)
