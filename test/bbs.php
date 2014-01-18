@@ -146,6 +146,8 @@
 			
 			$readonly = $setting->BBS_READONLY;
 			
+			$this->hostinfo = HostInfo::getInstance();
+
 			if( ($readonly == "1") || 
 				( ($readonly == "caps") && (!isset(CapInfo::getInstance()->capdata)) )
 			  )
@@ -156,7 +158,6 @@
 						"読み取り専用モードです。", ErrMsgID::get()->READONLY);
 			}
 			
-			$this->hostinfo = HostInfo::getInstance();
 			$this->hostinfo->Init($_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT']);
 
 			if(isset($this->hostinfo->carrier))
