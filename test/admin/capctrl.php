@@ -48,12 +48,6 @@
 		$page = 0;
 	}
 
-	if(ErrInfo::IsErr($ret))
-	{
-		AdminUtil::OutPutErrHtml($ret->sysmsg, "{$baseurl}/admin/login.php");
-		exit;
-	}
-
 	$setting = SettingInfo::getInstance();
 	
 	$ret = CapList::getInstance()->Init();
