@@ -32,13 +32,13 @@ if(pathinfo.length != 4)
 <div id="header">
 <span class="headlist">
 【<a href="">BBS2ch</a>】</span>
-<span style='float:left;'><a href="#footer">↓</a>
-<a href='javascript:location = "../../../../" + threadinfo.bbs + "/index.html";'>掲示板に戻る</a> <a href='javascript:threadinfo.resdisp("");'>全部</a> <a href='javascript:threadinfo.resdisp("|50");'>最新50</a>
+<span style="float:left;"><a href="#footer">↓</a>
+<a href='javascript:window.location = "../../../../" + threadinfo.bbs + "/index.html";'>掲示板に戻る</a> <a href='javascript:threadinfo.resdisp("");'>全部</a> <a href='javascript:threadinfo.resdisp("|50");'>最新50</a>
 </span>
-<br style='clear:both;'>
+<br style="clear:both;">
 </div>
 <h1 id="subject"></h1>
-<dl id=resbodys>
+<dl id="resbodys">
 </dl>
 
 <font color="red" face="Arial"><b id="size"></b></font> <span id="speed" title="勢いは一日あたりのレス数の目安です。(勢い=レス数÷スレが立ってからの分数×60×24)" style="font-family:Arial;color:green;"></span>&nbsp;&nbsp;
@@ -48,14 +48,14 @@ if(pathinfo.length != 4)
 <a href="javascript:threadinfo.ajax_getdat();">新着レスを表示</a>
 <hr size="1" class="footer">
 </div>
-<form action="" utn="utn" id="resparams" onSubmit="return threadinfo.res_post();">
+<form action="" utn="utn" id="resparams" onsubmit="return threadinfo.res_post();">
  名前：<input type="text" name="FROM" id="name" value=""> 
  E-mail(<font size="1">省略可</font>)：<input type="text" name="mail" id="e-mail" value=""><br>
  <textarea name="MESSAGE" id="message" rows="6" erap="off"></textarea><br>
  <input type="hidden" name="time" value="">
  <input type="hidden" name="suka" value="">
- <input type="button" value="書き込む【Shift+Enter】" id="submit" onClick="threadinfo.res_post();"><br>
+ <input type="button" value="書き込む【Shift+Enter】" id="submit" onclick="threadinfo.res_post();"><br>
  </form><br>
-</span><br style='clear:both;'>
+</span><br style="clear:both;">
 </body>
 </html>
