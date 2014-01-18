@@ -63,6 +63,17 @@
 	$form = new FormUtil();
 	$form->addElement("authority", $authoritys);
 	
+	$authoritylist = array(
+			"PASS_TATESUGI",
+			"PASS_POSTEDLIMIT",
+			"EDIT_BBS_SETTING",
+			"EDIT_THREADS",
+			"EDIT_RES",
+			"EDIT_REGULATION",
+			"EDIT_PLUGINS",
+			"EDIT_NGWORD",
+		);
+
 	if(isset($_POST["mode"]))
 	{
 		if($_POST["mode"] == "edit")
@@ -105,16 +116,6 @@
 		}
 	}
 	
-	$authoritylist = array(
-			"PASS_TATESUGI",
-			"PASS_POSTEDLIMIT",
-			"EDIT_BBS_SETTING",
-			"EDIT_THREADS",
-			"EDIT_RES",
-			"EDIT_REGULATION",
-			"EDIT_PLUGINS",
-			"EDIT_NGWORD",
-		);
 	$count = count($authoritylist);
 ?>
 <html>
