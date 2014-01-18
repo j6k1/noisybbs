@@ -40,7 +40,7 @@
 			$this->is_cookie_id = false;
 			$this->ipaddr = $ip;
 			
-			$ipiinfo = Util::cnvip_to_int($this->ipaddr);
+			$ipinfo = Util::cnvip_to_int($this->ipaddr);
 			$this->intip = $ipinfo["ip"];
 			
 			$this->hostname = gethostbyaddr($this->ipaddr);
