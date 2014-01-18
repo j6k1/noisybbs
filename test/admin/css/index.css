@@ -1,0 +1,78 @@
+* {
+	font-family:arial,sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+#container {
+	width: 600px;
+}
+#passchg {
+	text-align: right;
+	margin-top: 16px;
+}
+#logout {
+	text-align: right;
+	margin-top: 4px;
+}
+.form {
+	background-color: #EEEEEE;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	border-style: double;
+	border-color: black;
+	border-width: 4px;
+	margin-top: 12px;
+}
+#bbsselect {
+	margin-top: 8px;
+	width: 480px;
+}
+
+#bbsselect .head {
+	background-color: #DDDDDD;
+	border-style: double;
+	border-color: black;
+	border-top-width: 3px;
+	border-bottom-width: 3px;
+	border-left-width: 3px;
+	border-right-width: 3px;
+}
+#bbsselect select {
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+	width: 480px;
+}
+#bbsmng {
+	text-align: left;
+	padding-bottom: 4px;
+	border-style: solid;
+	border-color: black;
+	border-top-width: 0px;
+	border-bottom-width: 1px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	width: 500px;
+}
+#capmng {
+	text-align: left;
+	padding-bottom: 4px;
+	border-style: solid;
+	border-color: black;
+	border-top-width: 0px;
+	border-bottom-width: 1px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	width: 500px;
+}
+div.line {
+	border-style: double;
+	border-color: black;
+	border-top-width: 0px;
+	border-bottom-width: 3px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	width: 540px;
+}

@@ -1,0 +1,2 @@
+#AddHandler application/x-httpd-phpcgi .php
+#mod_gzip_on Off

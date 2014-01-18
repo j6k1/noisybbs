@@ -1,0 +1,12 @@
+#order deny,allow
+#deny from all
+#allow from localhost
+AcceptPathInfo on
+RewriteEngine on
+RewriteRule ^read\.cgi(.*) read.php$1
+RewriteRule ^bbs\.cgi(.*) bbs.php$1
+SetEnvIf Request_URI "bbs.php$" CONTENT_TYPE=application/x-www-form-urlencoded
+AddType text/xml .rdf
+php_value default_charset Shift_JIS
+php_value mbstring.internal_encoding SJIS
+php_value mbstring.http_input pass

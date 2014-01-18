@@ -1,0 +1,90 @@
+body{
+	background-color:#ffffee;
+	color:#443333;
+	background-repeat:no-repeat;
+	background-attachment: fixed;
+	background-position: right bottom;
+	/* background-image:url('./dora.gif'); */
+	word-break: break-all;
+}
+@media screen and (max-width: 320px) {
+    body {
+	font-size: 75%;
+    }
+}
+a:link{
+	color: #0000FF;
+	text-decoration:none;
+}
+a:hover{
+	color: #FF0000;
+	text-decoration:underline;
+}
+a:visited{
+	color: purple;
+}
+#header{
+	text-align : left;
+	font-size:120%;
+	width:100%;
+	border-bottom: solid 1px #888;
+	padding-bottom: 12px;
+}
+#subject{
+
+}
+#e-mail {
+	width: 200px;
+}
+#name {
+	width: 260px;
+}
+#message {
+	width: 600px;
+}
+@media screen and (max-width: 320px) {
+	#message {
+		width: 300px;
+	}
+	#e-mail {
+		width: 75px;
+	}
+	#name {
+		width: 90px;
+	}
+	#footer {
+		font-size: 90%; 
+	}
+}
+img{
+	border:none;
+	display:inline;
+}
+
+h1{
+	font-size:200%;
+	font-weight:normal;
+	color:red;
+}
+
+dt {
+	/* color: #433; */
+	font-weight: normal;
+	font-size: 100%;
+	/*margin: 2px 0 0 3px;*/
+}
+dd {
+	/*margin: 2px 0 18px 3em;*/
+	margin-bottom:18px;
+}
+
+span.name{
+	color: green;
+}
+span.info{
+	/* color: #433; */
+	font-size: 90%;
+}
+span.headlist{
+	font-size:80%;
+}

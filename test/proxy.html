@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset=utf-8 />
+<title>Test</title>
+</head>
+<body>
+<script type="text/javascript">
+window.onload = function () {
+	var target = (parent && parent.postMessage ? parent : (parent && parent.document.postMessage ? parent.document : undefined));
+	if(!target)
+	{
+		console.error("This browser does not support window.postMessage!");
+		return;
+	}
+	
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function () {
+		if(xhr.readyState == 4){
+			var res = xhr.responseText;
+
+			if (typeof target != "undefined") {
+				target.postMessage(res, '*');
+			}
+		}
+	}
+	var paths = decodeURIComponent(window.location.search.substr(1)).split("/");
+	
+	if(paths.length < 3)
+	{
+		console.error("paths invalid!!");
+		return;
+	}
+	
+	paths.shift();
+	var bbs = paths.shift();
+	var key = paths.shift();
+	var url = "../" + bbs + "/dat/" + key + ".dat";
+	
+	xhr.open("GET", url, true);
+	xhr.send(null);
+}
+</script>
+</body>
+</html>

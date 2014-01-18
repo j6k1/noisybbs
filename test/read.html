@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+	<meta name="Author" content="">
+	<meta content="no-cache" http-equiv="Pragma">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+
+	<script type="text/javascript" src="../../../ajax/ecl.js"></script> <!-- Ajax -->
+	<script type="text/javascript" src="../../../ajax/ajaxlib.js"></script> <!-- Ajax -->
+	<script type="text/javascript" src="../../../ajax/2chbbsajax.js"></script> <!-- Ajax -->
+	<link rel="stylesheet" type="text/css" href="../../../ajax/read.css" media="screen">
+
+</head>
+<body>
+<script type="text/javascript">
+<!--
+var thisFile = location.pathname.match(/^.*\/test\/read.html/);
+var pathstr = location.pathname.replace(thisFile, "");
+var pathinfo = pathstr.split("/");
+
+if(pathinfo.length != 4)
+{
+	window.alert("URLの指定が不正です。");
+}
+// -->
+</script>
+<noscript>JavaScriptをOnにして下さい。</noscript>
+<div id="header">
+<span class="headlist">
+【<a href="">BBS2ch</a>】</span>
+<span style='float:left;'><a href="#footer">↓</a>
+<a href='javascript:location = "../../../../" + threadinfo.bbs + "/index.html";'>掲示板に戻る</a> <a href='javascript:threadinfo.resdisp("");'>全部</a> <a href='javascript:threadinfo.resdisp("|50");'>最新50</a>
+</span>
+<br style='clear:both;'>
+</div>
+<h1 id="subject"></h1>
+<dl id=resbodys>
+</dl>
+
+<font color="red" face="Arial"><b id="size"></b></font> <span id="speed" title="勢いは一日あたりのレス数の目安です。(勢い=レス数÷スレが立ってからの分数×60×24)" style="font-family:Arial;color:green;"></span>&nbsp;&nbsp;
+
+<div id="footer">
+<hr class="footer"><a href="#header">↑</a> <a href='javascript:location = "../../../../" + threadinfo.bbs + "/index.html";'>掲示板に戻る</a> <a href='javascript:threadinfo.resdisp("");'>全部</a> <a href='javascript:threadinfo.resdisp(threadinfo.pastfrom + "-" + threadinfo.pastto);'>前100</a> <a href='javascript:threadinfo.resdisp(threadinfo.nextfrom + "-" + threadinfo.nextto);'>次100</a> <a href='javascript:threadinfo.resdisp("|50");'>最新50</a>
+<a href="javascript:threadinfo.ajax_getdat();">新着レスを表示</a>
+<hr size="1" class="footer">
+</div>
+<form action="" utn="utn" id="resparams" onSubmit="return threadinfo.res_post();">
+ 名前：<input type="text" name="FROM" id="name" value=""> 
+ E-mail(<font size="1">省略可</font>)：<input type="text" name="mail" id="e-mail" value=""><br>
+ <textarea name="MESSAGE" id="message" rows="6" erap="off"></textarea><br>
+ <input type="hidden" name="time" value="">
+ <input type="hidden" name="suka" value="">
+ <input type="button" value="書き込む【Shift+Enter】" id="submit" onClick="threadinfo.res_post();"><br>
+ </form><br>
+</span><br style='clear:both;'>
+</body>
+</html>

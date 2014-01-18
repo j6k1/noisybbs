@@ -1,0 +1,108 @@
+* {
+	font-family:arial,sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+#container {
+	width: 640px;
+}
+#logout {
+	text-align: right;
+	margin-right: 12px;
+}
+.form {
+	background-color: #EEEEEE;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	border-style: double;
+	border-color: black;
+	border-width: 4px;
+	margin-top: 12px;
+}
+div.line {
+	width: 540px;
+	border-style: double;
+	border-color: black;
+	border-top-width: 0px;
+	border-bottom-width: 3px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	margin-top: 12px;
+	margin-bottom: 12px;
+}
+div.head {
+	width: 540px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 4px;
+	padding-right: 4px;
+	font-weight: bold;
+	background-color: #DDDDDD;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+}
+div.box {
+	width: 540px;
+	text-align: left;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+#plugins div.line {
+	text-align: center;
+	width: 540px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	border-style: double;
+	border-color: black;
+	border-top-width: 0px;
+	border-bottom-width: 3px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+}
+#plugins div.plugin {
+	text-align: left;
+}
+#plugins select {
+	font-size: 16px;
+}
+#plugins div.pluginstop {
+	color: red;
+	font-size: 12px;
+}
+#plugins div.comphtml {
+	color: red;
+	font-size: 12px;
+}
+#pagelink {
+	text-align: center;
+}
+#back {
+	text-align: left;
+	margin-right: 12px;
+}
+#reload {
+	text-align: left;
+	margin-left: 48px;
+	margin-right: 4px;
+}
+div.space {
+	margin-top: 12px;
+	margin-bottom: 12px;
+}
+div.plugin span.text input {
+	width: 520px;
+}
+div.errmsg {
+	color: red;
+	font-size: 14px;
+}
+div.msg {
+	color: red;
+	font-size: 14px;
+}

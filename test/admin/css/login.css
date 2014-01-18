@@ -1,0 +1,43 @@
+* {
+	font-family:arial,sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+h1 {
+	margin-top: 32px;
+}
+#container {
+	width: 400px;
+}
+#form {
+	background-color: #DDDDDD;
+	border-style: double;
+	border-color: black;
+	border-width: 4px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	margin-top: 60px;
+	margin-bottom: 12px;
+}
+#form div {
+	width: 240px;
+}
+#form .head {
+	padding: 2px;
+}
+#password input {
+	width: 240px;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+}
+#submit {
+	text-align: right;
+	margin-top: 12px;
+}
+#caplogin {
+	text-align: right;
+}
+#login {
+	text-align: right;
+}
