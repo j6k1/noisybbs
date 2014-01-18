@@ -466,7 +466,7 @@ EOM;
 			{
 				if(isset($this->writeinfo))
 				{
-					$name = $this->writeinfo->name;
+					$name = $this->writeinfo->FROM;
 					$mail = $this->writeinfo->mail;
 				}
 				else
