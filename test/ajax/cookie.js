@@ -26,7 +26,7 @@ var Cookie = (function () {
 		if(typeof expires === "undefined") expires = 0;
 		if(!(expires instanceof Date)) 
 		{
-			var expires = (function (sec) {
+			expires = (function (sec) {
 				var expires = new Date();
 				expires.setTime(sec);
 				return expires;
