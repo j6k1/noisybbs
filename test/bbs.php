@@ -385,15 +385,18 @@
 				$path = null;
 			}
 			
+			$c_name = isset($_POST["FROM"]) ? @mb_convert_encoding($_POST["FROM"], "UTF-8", "SJIS") : "";
+			$c_mail = isset($_POST["mail"]) ? @mb_convert_encoding($_POST["mail"],"UTF-8", "SJIS") : "";
+			
 			if(isset($path))
 			{
-				if(isset($_POST["FROM"])) setcookie("FROM", $_POST["FROM"], time()+3600*24*30, $path);
-				if(isset($_POST["mail"])) setcookie("mail", $_POST["mail"], time()+3600*24*30, $path);
+				setcookie("FROM", $c_name, time()+3600*24*30, $path);
+				setcookie("mail", $c_mail, time()+3600*24*30, $path);
 			}
 			else
 			{
-				if(isset($_POST["FROM"])) setcookie("FROM", $_POST["FROM"], time()+3600*24*30);
-				if(isset($_POST["mail"])) setcookie("mail", $_POST["mail"], time()+3600*24*30);
+				setcookie("FROM", $c_name, time()+3600*24*30);
+				setcookie("mail", $c_mail, time()+3600*24*30);
 			}
 			
 			if( ($this->hostinfo->is_cookie_id) && (!isset($_COOKIE['uniqid'])) )

@@ -83,8 +83,8 @@
 				return $ret;
 			}
 			
-			$c_name = $_COOKIE["FROM"];
-			$c_mail = $_COOKIE["mail"];
+			$c_name = isset($_COOKIE["FROM"]) ? $_COOKIE["FROM"] : "";
+			$c_mail = isset($_COOKIE["mail"]) ? $_COOKIE["mail"] : "";
 			
 			$c_name = @mb_convert_encoding($c_name, "SJIS", "UTF-8");
 			$c_mail = @mb_convert_encoding($c_mail, "SJIS", "UTF-8");
@@ -200,7 +200,7 @@
 <a href="">新着レスを表示</a>
 <hr size="1" class="footer">
 </div>
-<form action="../../../../test/bbs.php?guid=On" method="post" id="resform" utn="utn">
+<form action="../../../../test/bbs.cgi?guid=On" method="post" id="resform" utn="utn">
  名前：<input type="text" name="FROM" id="name" value="{$c_name}"> 
  E-mail(<font size="1">省略可</font>)：<input type="text" name="mail" id="e-mail" value="{$c_mail}"><br>
  <textarea name="MESSAGE" id="message" rows="6" erap="off"></textarea><br>
