@@ -70,10 +70,33 @@ div.box {
 	padding-left: 4px;
 	padding-right: 4px;
 }
+div.box div.setting-key-name {
+	position: relative;
+	height: 18px;
+}
+div.box div.setting-key-name > div.setting-key-label {
+	height: auto;
+	float: left;
+}
+div.box div.setting-key-name > div.setting-key-summary {
+	position: relative;
+	min-height: 100%;
+	float: left;
+	margin: 0px 0px 0px 2px;
+}
+div.box div.setting-key-name > div.setting-key-summary > div {
+	position: relative;
+	top: 0px;
+	padding: 1px 0px 0px 5px;
+	font-size: 12px;
+	height: auto;
+}
 div.box div.input {
+	clear: both;
 	text-align: center;
 }
 div.box div.checkbox {
+	clear: both;
 	margin-left: 24px;
 	text-align: left;
 }
@@ -88,6 +111,7 @@ div.box div.input input {
 	border-width: 1px;
 }
 div.box div.select {
+	clear: both;
 	margin-left: 16px;
 	text-align: left;
 }
@@ -97,10 +121,12 @@ div.box div.select input {
 	border-width: 1px;
 }
 div.box div.submit {
+	clear: both;
 	text-align: right;
 	margin-right: 12px;
 }
 div.box div.textarea {
+	clear: both;
 	text-align: center;
 }
 div.box div.textarea textarea {

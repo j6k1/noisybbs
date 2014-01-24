@@ -387,42 +387,42 @@
 		<div id="system">
 			<div class="box">
 				<form name="system" method="post" action="">
-					<div>BBS_TITLE</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_TITLE</div><div class="setting-key-summary"><div>(板の名前)</div></div></div>
 					<div class="input"><?php echo $form["system"]->Text("BBS_TITLE"); ?></div>
 					<div class="line"></div>
-					<div>RES_MAX</div>
+					<div class="setting-key-name"><div class="setting-key-label">RES_MAX</div><div class="setting-key-summary"><div>(スレッドのレス最大数)</div></div></div>
 					<div class="input"><?php echo $form["system"]->Text("RES_MAX"); ?></div>
 					<?php echo $form["system"]->ErrMessage("RES_MAX", "<div class='errmsg'>数値を入力してください。</div>"); ?>
 					<div class="line"></div>
-					<div>RES_INTERVAL</div>
+					<div class="setting-key-name"><div class="setting-key-label">RES_INTERVAL</div><div class="setting-key-summary"><div>(最小投稿間隔 ※これ未満だと規制されます)</div></div></div>
 					<div class="input"><?php echo $form["system"]->Text("RES_INTERVAL"); ?></div>
 					<?php echo $form["system"]->ErrMessage("RES_INTERVAL", "<div class='errmsg'>数値を入力してください。</div>"); ?>
 					<div class="line"></div>
-					<div>SAMBACOUNT</div>
+					<div class="setting-key-name"><div class="setting-key-label">SAMBACOUNT</div><div class="setting-key-summary"><div>(規制されるまでの回数 ※POSTEDLIMIT_TYPEがsambalikeのとき、RES_INTERVAL未満の間隔での投稿がこの回数繰り返されると規制されます。SAMBATIME時間経つと回数はリセットされます。)</div></div></div>
 					<div class="input"><?php echo $form["system"]->Text("SAMBACOUNT"); ?></div>
 					<?php echo $form["system"]->ErrMessage("SAMBACOUNT", "<div class='errmsg'>数値を入力してください。</div>"); ?>
 					<div class="line"></div>
-					<div>SAMBATIME</div>
+					<div class="setting-key-name"><div class="setting-key-summary">SAMBATIME</div><div class="setting-key-summary"><div>(書き込み規制が発動するまでのカウンタがクリアされるまでの時間 ※単位は時)</div></div></div>
 					<div class="input"><?php echo $form["system"]->Text("SAMBATIME"); ?></div>
 					<?php echo $form["system"]->ErrMessage("SAMBATIME", "<div class='errmsg'>数値を入力してください。</div>"); ?>
 					<div class="line"></div>
-					<div>POSTEDLIMIT_TYPE</div>
+					<div class="setting-key-name"><div class="setting-key-summary">POSTEDLIMIT_TYPE</div><div class="setting-key-summary"><div>(書き込み規制方式 ※intervalonlyが前回書き込みからRES_INTERVAL秒未満で書き込まれると書き込めないがそれ以上なら一度書き込み規制がかかっても書き込めます。sambalikeならカウンタに一定回数引っかかったら一定時間規制されます。)</div></div></div>
 					<div class="select">
 					<?php echo $form["system"]->SelectBox("POSTEDLIMIT_TYPE", 5); ?>
 					</div>
 					<?php echo $form["system"]->ErrMessage("POSTEDLIMIT_TYPE", "<div class='errmsg'>未定義の値です。</div>"); ?>
 					<div class="line"></div>
-					<div>BBS_DISP_IP</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_DISP_IP</div><div class="setting-key-summary"><div>(IPを表示するか否か)</div></div></div>
 					<div class="checkbox"><?php echo $form["system"]->CheckBox("BBS_DISP_IP", "checked"); ?></div>
 					<div class="line"></div>
-					<div>AIRPHONEIP_CHK</div>
+					<div class="setting-key-name"><div class="setting-key-label">AIRPHONEIP_CHK</div><div class="setting-key-summary"><div>(air-phoneをIP帯域で判別するかどうか)</div></div></div>
 					<div class="checkbox"><?php echo $form["system"]->CheckBox("AIRPHONEIP_CHK", "1"); ?></div>
 					<div class="line"></div>
-					<div>BBS_READ_SCRIPT</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_READ_SCRIPT</div><div class="setting-key-summary"><div>(スレッドを読むためのスクリプトとしてphpを利用するかjsを利用するか)</div></div></div>
 					<div class="select">
 					<?php echo $form["system"]->SelectBox("BBS_READ_SCRIPT", 5); ?></div>
 					<div class="line"></div>
-					<div>BBS_THREAD_CACHE</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_THREAD_CACHE</div><div class="setting-key-summary"><div>(phpでスレッドを読む場合にキャッシュ機能を有効にするか ※ブラウザの通信負荷が軽くなる)</div></div></div>
 					<div class="checkbox"><?php echo $form["system"]->CheckBox("BBS_THREAD_CACHE", "1"); ?></div>
 					<div class="line"></div>
 					<input type="hidden" name="mode" value="system">
@@ -437,28 +437,28 @@
 		<div id="design">
 			<div class="box">
 				<form name="design" method="post" action="">
-					<div>BBS_TITLE_COLOR</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_TITLE_COLOR</div><div class="setting-key-summary"><div>(掲示板名の文字色)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_TITLE_COLOR"); ?></div>
 					<div class="line"></div>
-					<div>BBS_TITLE_PICTURE</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_TITLE_PICTURE</div><div class="setting-key-summary"><div>(掲示板のバナー画像のURL)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_TITLE_PICTURE"); ?></div>
 					<div class="line"></div>
-					<div>BBS_BG_COLOR</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_BG_COLOR</div><div class="setting-key-summary"><div>(掲示板の背景色)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_BG_COLOR"); ?></div>
 					<div class="line"></div>
-					<div>BBS_BG_PICTURE</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_BG_PICTURE</div><div class="setting-key-summary"><div>(掲示板の背景画像)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_BG_PICTURE"); ?></div>
 					<div class="line"></div>
-					<div>BBS_TEXT_COLOR</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_TEXT_COLOR</div><div class="setting-key-summary"><div>(掲示板の文字色)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_TEXT_COLOR"); ?></div>
 					<div class="line"></div>
-					<div>BBS_LINK_COLOR</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_LINK_COLOR</div><div class="setting-key-summary"><div>(掲示板のリンク文字列の色)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_LINK_COLOR"); ?></div>
 					<div class="line"></div>
-					<div>BBS_ALINK_COLOR</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_ALINK_COLOR</div><div class="setting-key-summary"><div>(掲示板の選択中のリンクの色)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_ALINK_COLOR"); ?></div>
 					<div class="line"></div>
-					<div>BBS_VLINK_COLOR</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_VLINK_COLOR</div><div class="setting-key-summary"><div>(掲示板の表示済みのリンクの色)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_VLINK_COLOR"); ?></div>
 					<div class="line"></div>
 					<input type="hidden" name="bbs" value="<?php echo $bbs; ?>">
@@ -528,42 +528,42 @@
 		<div id="respost">
 			<div class="box">
 				<form name="respost" method="post" action="">
-					<div>BBS_READONLY</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_READONLY</div><div class="setting-key-summary"><div>(板を読み取り専用にするか否か ※これが有効だと書き込みません。)</div></div></div>
 					<div class="checkbox"><?php echo $form["respost"]->CheckBox("BBS_READONLY", "1"); ?></div>
 					<div class="line"></div>
-					<div>BBS_NONAME_NAME</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_NONAME_NAME</div><div class="setting-key-summary"><div>(名前を空でレスを書き込んだときの名前欄の文字列)</div></div></div>
 					<div class="input"><?php echo $form["respost"]->Text("BBS_NONAME_NAME"); ?></div>
 					<div class="line"></div>
-					<div>THRE_STOP_NAME</div>
+					<div class="setting-key-name"><div class="setting-key-label">THRE_STOP_NAME</div><div class="setting-key-summary"><div>(レス最大時に最後に追加される書き込みの名前欄の文字列)</div></div></div>
 					<div class="input"><?php echo $form["respost"]->Text("THRE_STOP_NAME"); ?></div>
 					<div class="line"></div>
-					<div>BBS_LINE_NUMBER</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_LINE_NUMBER</div><div class="setting-key-summary"><div>(index.htmlの一行辺りの行数およびスレッド閲覧ページの改行数 ※こちらは2倍の値になる)</div></div></div>
 					<div class="input"><?php echo $form["respost"]->Text("BBS_LINE_NUMBER"); ?></div>
 					<?php echo $form["respost"]->ErrMessage("BBS_LINE_NUMBER", "<div class='errmsg'>数値を入力してください。</div>"); ?>
 					<div class="line"></div>
-					<div>BBS_SUBJECT_COUNT</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_SUBJECT_COUNT</div><div class="setting-key-summary"><div>(スレッドタイトルの最大バイト数 ※SJIS)</div></div></div>
 					<div class="input"><?php echo $form["respost"]->Text("BBS_SUBJECT_COUNT"); ?></div>
 					<?php echo $form["respost"]->ErrMessage("BBS_SUBJECT_COUNT", "<div class='errmsg'>数値を入力してください。</div>"); ?>
 					<div class="line"></div>
-					<div>BBS_NAME_COUNT</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_NAME_COUNT</div><div class="setting-key-summary"><div>(名前欄の最大バイト数 ※SJIS)</div></div></div>
 					<div class="input"><?php echo $form["respost"]->Text("BBS_NAME_COUNT"); ?></div>
 					<?php echo $form["respost"]->ErrMessage("BBS_NAME_COUNT", "<div class='errmsg'>数値を入力してください。</div>"); ?>
 					<div class="line"></div>
-					<div>BBS_MAIL_COUNT</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_MAIL_COUNT</div><div class="setting-key-summary"><div>(メールアドレス欄の最大バイト数)</div></div></div>
 					<div class="input"><?php echo $form["respost"]->Text("BBS_MAIL_COUNT"); ?></div>
 					<?php echo $form["respost"]->ErrMessage("BBS_MAIL_COUNT", "<div class='errmsg'>数値を入力してください。</div>"); ?>
 					<div class="line"></div>
-					<div>BBS_MESSAGE_COUNT</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_MESSAGE_COUNT</div><div class="setting-key-summary"><div>(一回の投稿レスの最大バイト数 ※SJIS)</div></div></div>
 					<div class="input"><?php echo $form["respost"]->Text("BBS_MESSAGE_COUNT"); ?></div>
 					<?php echo $form["respost"]->ErrMessage("BBS_MESSAGE_COUNT", "<div class='errmsg'>数値を入力するか、未入力にしてください。</div>"); ?>
 					<div class="line"></div>
-					<div>NANASHI_CHECK</div>
+					<div class="setting-key-name"><div class="setting-key-label">NANASHI_CHECK</div><div class="setting-key-summary"><div>(名前欄空を許可するかどうか)</div></div></div>
 					<div class="checkbox"><?php echo $form["respost"]->CheckBox("NANASHI_CHECK", "1"); ?></div>
 					<div class="line"></div>
-					<div>NULLMSG_NG</div>
+					<div class="setting-key-name"><div class="setting-key-label">NULLMSG_NG</div><div class="setting-key-summary"><div>(本文欄を空にできるか否か)</div></div></div>
 					<div class="checkbox"><?php echo $form["respost"]->CheckBox("NULLMSG_NG", "checked"); ?></div>
 					<div class="line"></div>
-					<div>BBS_SLIP</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_SLIP</div><div class="setting-key-summary"><div>(携帯とPCの識別記号表示の有無)</div></div></div>
 					<div class="checkbox"><?php echo $form["respost"]->CheckBox("BBS_SLIP", "checked"); ?></div>
 					<div class="line"></div>
 					<input type="hidden" name="bbs" value="<?php echo $bbs; ?>">
@@ -578,10 +578,10 @@
 		<div id="threcreate">
 			<div class="box">
 				<form name="threcreate" method="post" action="">
-					<div>BBS_THREAD_TATESUGI</div>
+					<div class="setting-key-name"><div class="setting-key-label">BBS_THREAD_TATESUGI</div><div class="setting-key-summary"><div>(同一IP帯域ごとのスレ立て数最大記録レコード数)</div></div></div>
 					<div class="input"><?php echo $form["threcreate"]->Text("BBS_THREAD_TATESUGI"); ?></div>
 					<?php echo $form["threcreate"]->ErrMessage("BBS_THREAD_TATESUGI", "<div class='errmsg'>数値を入力してください。</div>"); ?>
-					<div>THRECRE_MAX</div>
+					<div class="setting-key-name"><div class="setting-key-label">THRECRE_MAX</div><div class="setting-key-summary"><div>(リストに既にある同一IP帯域からスレッドを立てられる最大数)</div></div></div>
 					<div class="input"><?php echo $form["threcreate"]->Text("THRECRE_MAX"); ?></div>
 					<?php echo $form["threcreate"]->ErrMessage("THRECRE_MAX", "<div class='errmsg'>数値を入力してください。</div>"); ?>
 					<input type="hidden" name="bbs" value="<?php echo $bbs; ?>">
