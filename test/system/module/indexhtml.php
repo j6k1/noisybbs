@@ -37,7 +37,11 @@
 			if($php_mode) { $ext = "cgi"; } else { $ext = "html"; }
 
 			$output = new BBSOutPutStream();
-
+			
+			$BBS_BG_PICTURE = htmlspecialchars($setting->BBS_BG_PICTURE, ENT_QUOTES | ENT_HTML401);
+			$BBS_TITLE_PICTURE = htmlspecialchars($setting->BBS_TITLE_PICTURE, ENT_QUOTES | ENT_HTML401);
+			$BBS_TITLE = htmlspecialchars($setting->BBS_TITLE, ENT_QUOTES | ENT_HTML401);
+			
 			$output->PrintStr(<<<EOM
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
   "http://www.w3.org/TR/html4/loose.dtd">
@@ -53,13 +57,13 @@ body,td,a,p,.h{
 	background-color: {$setting->BBS_BG_COLOR};
 }
 body{
-	background-image: url('{$setting->BBS_BG_PICTURE}');
+	background-image: url('{$BBS_BG_PICTURE}');
 	color: {$setting->BBS_TEXT_COLOR};
 }
 #title{
 	font-size: 32px;
 	padding-bottom: 20px;
-	background-image: url('{$setting->BBS_TITLE_PICTURE}');
+	background-image: url('{$BBS_TITLE_PICTURE}');
 	color: {$setting->BBS_TITLE_COLOR}
 }
 #container {
@@ -174,13 +178,13 @@ a:hover {
 	}
 }
 </style>
-<title>{$setting->BBS_TITLE}</title>
+<title>{$BBS_TITLE}</title>
 {$analysistxt}
 </head>
 <body>
 <center>
 	<div id="container">
-		<div id="title">{$setting->BBS_TITLE}</div>
+		<div id="title">{$BBS_TITLE}</div>
 		<div id="summary">{$headtxt}</div>
 		
 		<div id="listhead">è„à ÉXÉåÉbÉhàÍóó({$setting->BBS_THREAD_NUMBER}åèÇ‹Ç≈)</div>
