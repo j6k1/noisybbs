@@ -194,7 +194,7 @@
 			$str = str_replace('\'','&#39;',$str);
 			$str = str_replace('"','&quot;',$str);
 		
-			return $str;			
+			return $str;
 		}
 	
 		function adminhtmlspecialchars($str)
