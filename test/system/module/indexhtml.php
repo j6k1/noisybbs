@@ -53,7 +53,7 @@ body,td,a,p,.h{
 	background-color: {$setting->BBS_BG_COLOR};
 }
 body{
-	background-image: {$setting->BBS_BG_PICTURE};
+	background-image: url('{$setting->BBS_BG_PICTURE}');
 	color: {$setting->BBS_TEXT_COLOR};
 }
 #title{
