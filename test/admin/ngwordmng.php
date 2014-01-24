@@ -94,10 +94,8 @@
 
 		if($editmode == "update")
 		{
-			$ngword = $_POST["ngword"];		
-			$form["edit"]->addElement("ngword", $_POST["ngword"]);
-			
-			$form["edit"]->setElementValue("ngword", $_POST["ngword"]);
+			$ngword = isset($_POST["ngword"]) ? $_POST["ngword"] : array();
+			$form["edit"]->setElementValue("ngword", $ngword);
 			
 			if(isset($_POST["ngword"]) && is_array($_POST["ngword"]))
 			{

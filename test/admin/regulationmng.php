@@ -94,10 +94,8 @@
 
 		if($editmode == "update")
 		{
-			$regulation = $_POST["regulation"];		
-			$form["edit"]->addElement("regulation", $_POST["regulation"]);
-	
-			$form["edit"]->setElementValue("regulation", $_POST["regulation"]);
+			$regulation = isset($_POST["regulation"]) ? $_POST["regulation"] : array();
+			$form["edit"]->setElementValue("regulation", $regulation);
 			
 			if(isset($_POST["regulation"]) && is_array($_POST["regulation"]))
 			{
