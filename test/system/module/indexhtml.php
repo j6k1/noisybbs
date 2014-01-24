@@ -59,7 +59,7 @@ body{
 #title{
 	font-size: 32px;
 	padding-bottom: 20px;
-	background-image: {$setting->BBS_TITLE_PICTURE};
+	background-image: url('{$setting->BBS_TITLE_PICTURE}');
 	color: {$setting->BBS_TITLE_COLOR}
 }
 #container {
