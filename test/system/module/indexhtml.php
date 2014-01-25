@@ -38,9 +38,9 @@
 
 			$output = new BBSOutPutStream();
 			
-			$BBS_BG_PICTURE = htmlspecialchars($setting->BBS_BG_PICTURE, ENT_QUOTES | ENT_HTML401);
-			$BBS_TITLE_PICTURE = htmlspecialchars($setting->BBS_TITLE_PICTURE, ENT_QUOTES | ENT_HTML401);
-			$BBS_TITLE = htmlspecialchars($setting->BBS_TITLE, ENT_QUOTES | ENT_HTML401);
+			$BBS_BG_PICTURE = htmlspecialchars($setting->BBS_BG_PICTURE, ENT_QUOTES);
+			$BBS_TITLE_PICTURE = htmlspecialchars($setting->BBS_TITLE_PICTURE, ENT_QUOTES);
+			$BBS_TITLE = htmlspecialchars($setting->BBS_TITLE, ENT_QUOTES);
 			$BBS_BG_COLOR = Util::valid_css_color_val($setting->BBS_BG_COLOR);
 			$BBS_TEXT_COLOR = Util::valid_css_color_val($setting->BBS_TEXT_COLOR);
 			$BBS_TITLE_COLOR = Util::valid_css_color_val($setting->BBS_TITLE_COLOR);
