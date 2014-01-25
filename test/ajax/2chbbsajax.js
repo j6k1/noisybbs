@@ -175,7 +175,7 @@
 			var self = this;
 			var params = $("#resparams");
 		
-			this.startSendingPage();
+			this.startSendingView();
 			
 			this.ajax.post(this.createPostURL(), {
 				callback: function (data, status) {
@@ -241,7 +241,7 @@
 		p.terminateLoadingView = function () {
 			window.clearInterval(this.timerid);
 		};
-		p.startSendingPage = function () {
+		p.startSendingView = function () {
 			var count = 3;
 			
 			this.timerid = window.setInterval( function () {
