@@ -174,14 +174,14 @@
 	 	array('/^intervalonly\z/', '/^sambalike\z/'), 
 		array("intervalonly" => "intervalonly", "sambalike" => "sambalike"));
 		
-	$form["design"]->addElement("BBS_TITLE_COLOR", $setting->BBS_TITLE_COLOR, null);
+	$form["design"]->addElement("BBS_TITLE_COLOR", $setting->BBS_TITLE_COLOR, Util::valid_css_color_regexp());
 	$form["design"]->addElement("BBS_TITLE_PICTURE", $setting->BBS_TITLE_PICTURE, null);
-	$form["design"]->addElement("BBS_BG_COLOR", $setting->BBS_BG_COLOR, null);
+	$form["design"]->addElement("BBS_BG_COLOR", $setting->BBS_BG_COLOR, Util::valid_css_color_regexp());
 	$form["design"]->addElement("BBS_BG_PICTURE", $setting->BBS_BG_PICTURE, null);
-	$form["design"]->addElement("BBS_TEXT_COLOR", $setting->BBS_TEXT_COLOR, null);
-	$form["design"]->addElement("BBS_LINK_COLOR", $setting->BBS_LINK_COLOR, null);
-	$form["design"]->addElement("BBS_ALINK_COLOR", $setting->BBS_ALINK_COLOR, null);
-	$form["design"]->addElement("BBS_VLINK_COLOR", $setting->BBS_VLINK_COLOR, null);
+	$form["design"]->addElement("BBS_TEXT_COLOR", $setting->BBS_TEXT_COLOR, Util::valid_css_color_regexp());
+	$form["design"]->addElement("BBS_LINK_COLOR", $setting->BBS_LINK_COLOR, Util::valid_css_color_regexp());
+	$form["design"]->addElement("BBS_ALINK_COLOR", $setting->BBS_ALINK_COLOR, Util::valid_css_color_regexp());
+	$form["design"]->addElement("BBS_VLINK_COLOR", $setting->BBS_VLINK_COLOR, Util::valid_css_color_regexp());
 	
 	$form["respost"]->addElement("BBS_READONLY", $setting->BBS_READONLY, array(
 		CheckPattern::get()->nullstring, 
