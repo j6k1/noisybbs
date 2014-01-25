@@ -1020,7 +1020,7 @@
 			return (($h << 16) | $l);
 		}
 		
-		function valid_color_regexp()
+		function valid_css_color_regexp()
 		{
 			static $regexp = null;
 			
@@ -1054,7 +1054,7 @@ EOM;
 			return $regexp;
 		}
 		
-		function valid_color_val($cssColor)
+		function valid_css_color_val($cssColor)
 		{
 			if(preg_match(Util::valid_color_regexp(), $cssColor) == 0)
 			{
