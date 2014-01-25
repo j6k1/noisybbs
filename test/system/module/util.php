@@ -1039,7 +1039,7 @@
 			$hsl_args_a = strtr('(?: *{angle} *, *{percent} *, *{percent} *, *(?:0\.\d|1|0))', array("angle" => $angle, "percent" => $percent));
 			
 			$regexp = <<<EOM
-/^([a-zA-Z]|#{hex}{3}|#{hex}{6}|rgb\({digit_3}\)|rgb\({percent_3}\)|rgba\({digit_a}\)|rgba\({percent_a}\)|hsl\(\{hsl_args}\)|hsla\({hsl_args_a}\))\z/';
+/^([a-zA-Z]+|#{hex}{3}|#{hex}{6}|rgb\({digit_3}\)|rgb\({percent_3}\)|rgba\({digit_a}\)|rgba\({percent_a}\)|hsl\(\{hsl_args}\)|hsla\({hsl_args_a}\))\z/';
 EOM;
 			$regexp = strtr($regexp, array(
 				"hex" => $hex,
