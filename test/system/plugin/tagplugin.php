@@ -60,8 +60,8 @@
 			$this->enable = false;
 			$this->sjis_valid_none_ctrl_char_reg = '(?:[\x20-\x7E\xA1-\xDF]|(?:[\x81-\x9F\xE0-\xEF](?:[\x40-\x7E\x80-\xFC])))';
 			$this->sjischar_reg = '(?:[\x00-\x1F\x20-\x7E\x7F\xA1-\xDF]|(?:[\x81-\x9F\xE0-\xEF](?:[\x40-\x7E\x80-\xFC]|[\x00-\x3F\x7F\xFD-\xFF]))|(?:[\x80\xA0\xF0-\xFF][\x00-\xFF]))';
-			$this->stringreg_dquoets = "(?:\"(?:\\x5c\\x5c|\\x5c{$sjischar_reg}|[^\"])*\")";
-			$this->stringreg_squoets = "(?:'(?:\\x5c\\x5c|\\x5c{$sjischar_reg}|[^'])*')";
+			$this->stringreg_dquoets = "(?:\"(?:\\x5c\\x5c|\\x5c{$this->sjischar_reg}|[^\"])*\")";
+			$this->stringreg_squoets = "(?:'(?:\\x5c\\x5c|\\x5c{$this->sjischar_reg}|[^'])*')";
 			$this->html_entity_reg = '(?:(?:&#x([\da-fA-F]+);)|(?:&#(\d+);))';
 			$this->backslash_code_css1_reg = '(?:\x5c([\da-fA-F]{1,4}))';
 			$this->backslash_code_css2_reg = '(?:\x5c([\da-fA-F]{1,6}) ?)';
