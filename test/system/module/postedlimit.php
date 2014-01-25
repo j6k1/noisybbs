@@ -96,7 +96,7 @@
 					{
 						PostedLimit::rentoulist_update($hostinfo, $time, false, $cnt);
 						
-						$msgargs["wait"] = $setting->SAMBATIME - ($time - $result[1]);
+						$msgargs["wait"] = floor( (($setting->SAMBATIME * 60) - ($time - (int)$result[1])) / 60);
 						return Logging::generrinfo($postedlimit,
 							__FUNCTION__ , __LINE__ , 
 							$errmsg->postedlimit, ErrMsgID::get()->SAMBANOW, $msgargs);
