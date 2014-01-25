@@ -406,7 +406,7 @@ EOM;
 	padding: 0px;
 }
 body {
-	background-color: <?php echo $setting->BBS_BG_COLOR; ?>;
+	background-color: <?php echo Util::valid_css_color_val($setting->BBS_BG_COLOR); ?>;
 }
 #container {
 	width: 800px;
@@ -423,15 +423,15 @@ body {
 	}
 }
 a:link {
-	color: <?php echo $setting->BBS_LINK_COLOR; ?>;
+	color: <?php echo Util::valid_css_color_val($setting->BBS_LINK_COLOR); ?>;
 	
 }
 a:visited {
-	color: <?php echo $setting->BBS_VLINK_COLOR; ?>;
+	color: <?php echo Util::valid_css_color_val($setting->BBS_VLINK_COLOR); ?>;
 	
 }
 a:hover {
-	color: <?php echo $setting->BBS_ALINK_COLOR; ?>;
+	color: <?php echo Util::valid_css_color_val($setting->BBS_ALINK_COLOR); ?>;
 	
 }
 .form {
@@ -488,14 +488,14 @@ div.head {
 	margin-bottom: 20px;
 }
 </style>
-<title><?php echo $setting->BBS_TITLE; ?> - 過去ログ一覧</title>
+<title><?php echo htmlspecialchars($setting->BBS_TITLE, ENT_QUOTES); ?> - 過去ログ一覧</title>
 </head>
 <body>
 <center>
 <div id="container">
 	<div id="box">
 		<div id="back"><a href="<?php echo "{$rooturl}/{$bbs}/index.html"; ?>">板TOPへ戻る</a></div>
-		<div class="head"><?php echo $setting->BBS_TITLE; ?> - 過去ログ一覧</div>
+		<div class="head"><?php echo htmlspecialchars($setting->BBS_TITLE, ENT_QUOTES); ?> - 過去ログ一覧</div>
 		<div class="form">
 			<form name="searchdate" method="post" action="">
 				<?php echo $form->SelectBox("start_year", 5, array("id" => "start_year")); ?> / 

@@ -64,12 +64,14 @@
 			$end = $page * 10;
 			
 			$output = new BBSOutPutStream();
-
+			$BBS_TITLE = htmlspecialchars($setting->BBS_TITLE, ENT_QUOTES);
+			$BBS_SUBJECT_COLOR = Util::valid_css_color_val($setting->BBS_SUBJECT_COLOR);
+			
 			$output->PrintStr(<<<EOM
-<html><head><title>{$setting->BBS_TITLE}</title>
+<html><head><title>{$BBS_TITLE}</title>
 <meta http-equiv=Content-Type content="text/html;charset=Shift-JIS">
 </head><!--nobanner-->
-<font color={$setting->BBS_SUBJECT_COLOR} size=+1>{$setting->BBS_TITLE}</font>
+<font color={$BBS_SUBJECT_COLOR} size=+1>{$BBS_TITLE}</font>
 <dl><br><br>
 
 EOM
