@@ -1029,13 +1029,13 @@
 			$digit = '(?:25[1-5]|2[1-4]\d|1\d\d|1?\d)';
 			$hex = '(?:[a-fA-F]\d)';
 			
-			$percent_3 = strtr('(?: *{percent} *, *{percent} *, *{percent} *)', array("percent" => $percent));
-			$digit_3 = strtr('(?: *{digit} *, *{digit} *, *{digit} *)', array("digit" => $digit));
-			$percent_3_a = strtr('(?: *{percent} *, *{percent} *, *{percent} *, *(?:0\.\d|1|0) *)', array("percent" => $percent));
-			$digit_3_a = strtr('(?: *{digit} *, *{digit} *, *{digit} *, *(?:0\.\d|1|0) *)', array("digit" => $digit));
+			$percent_3 = strtr('(?: *{percent} *, *{percent} *, *{percent} *)', array("{percent}" => $percent));
+			$digit_3 = strtr('(?: *{digit} *, *{digit} *, *{digit} *)', array("{digit}" => $digit));
+			$percent_3_a = strtr('(?: *{percent} *, *{percent} *, *{percent} *, *(?:0\.\d|1|0) *)', array("{percent}" => $percent));
+			$digit_3_a = strtr('(?: *{digit} *, *{digit} *, *{digit} *, *(?:0\.\d|1|0) *)', array("{digit}" => $digit));
 			$angle = '(?:360|3[0-5]\d|[1-2]\d{2}|[1-9]\d|\d)';
-			$hsl_args = strtr('(?: *{angle} *, *{percent} *, *{percent} *)', array("angle" => $angle, "percent" => $percent));
-			$hsl_args_a = strtr('(?: *{angle} *, *{percent} *, *{percent} *, *(?:0\.\d|1|0))', array("angle" => $angle, "percent" => $percent));
+			$hsl_args = strtr('(?: *{angle} *, *{percent} *, *{percent} *)', array("{angle}" => $angle, "{percent}" => $percent));
+			$hsl_args_a = strtr('(?: *{angle} *, *{percent} *, *{percent} *, *(?:0\.\d|1|0))', array("{angle}" => $angle, "{percent}" => $percent));
 			
 			$regexp = <<<EOM
 /^([a-zA-Z]+|#{hex}{3}|#{hex}{6}|rgb\({digit_3}\)|rgb\({percent_3}\)|rgba\({digit_3_a}\)|rgba\({percent_3_a}\)|hsl\(\{hsl_args}\)|hsla\({hsl_args_a}\))\z/
