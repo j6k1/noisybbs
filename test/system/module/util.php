@@ -1032,7 +1032,7 @@
 			
 			$percent_3 = strtr('(?: *{percent} *, *{percent} *, *{percent} *)', array("percent" => $percent));
 			$digit_3 = strtr('(?: *{digit} *, *{digit} *, *{digit} *)', array("digit" => $digit));
-			$percent_a = strtr('(?: *{percent} *, *{percent} *, *{percent} *, *(?:0\.\d|1|0) *)', array("percent" => $percent));
+			$percent_3_a = strtr('(?: *{percent} *, *{percent} *, *{percent} *, *(?:0\.\d|1|0) *)', array("percent" => $percent));
 			$digit_3_a = strtr('(?: *{digit} *, *{digit} *, *{digit} *, *(?:0\.\d|1|0) *)', array("digit" => $digit));
 			$angle = '(?:360|3[0-5]\d|[1-2]\d{2}|[1-9]\d|\d)';
 			$hsl_args = strtr('(?: *{angle} *, *{percent} *, *{percent} *)', array("angle" => $angle, "percent" => $percent));
