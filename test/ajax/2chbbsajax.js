@@ -428,7 +428,7 @@ var threadinfo = {
 		var bbs = this.bbs;
 		var key = this.thread
 		
-		var url = this.urlbase + bbs + "/dat/" + key + ".dat";
+		var url = this.urlbase + bbs + "/dat/" + key + ".dat?" + (new Date()).getTime();
 	
 		var headers = new Array();
 		var mimetype = "text/plain; charset=shift_jis";
@@ -446,7 +446,7 @@ var threadinfo = {
 		document.getElementById("resbodys").innerHTML = "<span id='waiting'><b>“Ç‚İ‚İ’†...</b></span>";
 		var count = 3;
 		
-		this.timerid = window.setInterval( function () {
+		this.timerid = window.setInterval(function () {
 			count++;
 			var str = "“Ç‚İ‚İ’†";
 			for(var i=0; i < count; i++)
