@@ -75,6 +75,10 @@
 							callback.call(self.thread, true, "");
 						}
 					}
+					else
+					{
+						callback.call(self.thread, true, "");
+					}
 				},
 				headers: headers
 			});
