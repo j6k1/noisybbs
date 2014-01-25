@@ -60,7 +60,7 @@
 	</div>
 	<div class="form">
 		<div id="capcreate">
-			<div class="head">キャップ作成</div>
+			<div class="head">キャップ管理</div>
 			<div class="space"></div>
 			<div><a href="<?php echo $baseurl; ?>/admin/capcreate.php">キャップ作成ページへ</a></div>
 			<div class="line"></div>
