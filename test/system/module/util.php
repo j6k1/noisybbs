@@ -1056,7 +1056,7 @@ EOM;
 		
 		function valid_css_color_val($cssColor)
 		{
-			if(preg_match(Util::valid_color_regexp(), $cssColor) == 0)
+			if(preg_match(Util::valid_css_color_regexp(), $cssColor) == 0)
 			{
 				return "none";
 			}
