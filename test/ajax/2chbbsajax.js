@@ -52,7 +52,11 @@
 			
 			this.ajax.get(url, {
 				callback: function (data, status) {
-					if(status !== 200 && status !== 304)
+					if(status === 404 || status === 302)
+					{
+						callback.call(self.thread, false, "該当するスレッドは削除されたか、存在しません。");
+					}
+					else if(status !== 200 && status !== 304)
 					{
 						callback.call(self.thread, false, "通信エラーが発生しました。");
 					}
