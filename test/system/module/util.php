@@ -1023,7 +1023,6 @@
 		function valid_css_color_regexp()
 		{
 			static $regexp = null;
-			
 			if(isset($regexp)) return $regexp;
 			
 			$percent = '(?:1\d\d|[1-9]\d||[1-9])%';
@@ -1042,13 +1041,13 @@
 /^([a-zA-Z]+|#{hex}{3}|#{hex}{6}|rgb\({digit_3}\)|rgb\({percent_3}\)|rgba\({digit_3_a}\)|rgba\({percent_3_a}\)|hsl\(\{hsl_args}\)|hsla\({hsl_args_a}\))\z/
 EOM;
 			$regexp = strtr($regexp, array(
-				"hex" => $hex,
-				"digit_3" => $digit_3,
-				"percent_3" => $percent_3,
-				"digit_3_a" => $digit_3_a,
-				"percent_3_a" => $percent_3_a,
-				"hsl_args" => $hsl_args,
-				"hsl_args_a" => $hsl_args_a
+				"{hex}" => $hex,
+				"{digit_3}" => $digit_3,
+				"{percent_3}" => $percent_3,
+				"{digit_3_a}" => $digit_3_a,
+				"{percent_3_a}" => $percent_3_a,
+				"{hsl_args}" => $hsl_args,
+				"{hsl_args_a}" => $hsl_args_a
 			));
 			
 			return $regexp;
