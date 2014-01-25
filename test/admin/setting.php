@@ -439,27 +439,33 @@
 				<form name="design" method="post" action="">
 					<div class="setting-key-name"><div class="setting-key-label">BBS_TITLE_COLOR</div><div class="setting-key-summary"><div>(掲示板名の文字色)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_TITLE_COLOR"); ?></div>
+					<?php echo $form["system"]->ErrMessage("BBS_TITLE_COLOR", "<div class='errmsg'>色の形式が不正です。</div>"); ?>
 					<div class="line"></div>
 					<div class="setting-key-name"><div class="setting-key-label">BBS_TITLE_PICTURE</div><div class="setting-key-summary"><div>(掲示板のバナー画像のURL)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_TITLE_PICTURE"); ?></div>
 					<div class="line"></div>
 					<div class="setting-key-name"><div class="setting-key-label">BBS_BG_COLOR</div><div class="setting-key-summary"><div>(掲示板の背景色)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_BG_COLOR"); ?></div>
+					<?php echo $form["system"]->ErrMessage("BBS_BG_COLOR", "<div class='errmsg'>色の形式が不正です。</div>"); ?>
 					<div class="line"></div>
 					<div class="setting-key-name"><div class="setting-key-label">BBS_BG_PICTURE</div><div class="setting-key-summary"><div>(掲示板の背景画像)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_BG_PICTURE"); ?></div>
 					<div class="line"></div>
 					<div class="setting-key-name"><div class="setting-key-label">BBS_TEXT_COLOR</div><div class="setting-key-summary"><div>(掲示板の文字色)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_TEXT_COLOR"); ?></div>
+					<?php echo $form["system"]->ErrMessage("BBS_TEXT_COLOR", "<div class='errmsg'>色の形式が不正です。</div>"); ?>
 					<div class="line"></div>
 					<div class="setting-key-name"><div class="setting-key-label">BBS_LINK_COLOR</div><div class="setting-key-summary"><div>(掲示板のリンク文字列の色)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_LINK_COLOR"); ?></div>
+					<?php echo $form["system"]->ErrMessage("BBS_LINK_COLOR", "<div class='errmsg'>色の形式が不正です。</div>"); ?>
 					<div class="line"></div>
 					<div class="setting-key-name"><div class="setting-key-label">BBS_ALINK_COLOR</div><div class="setting-key-summary"><div>(掲示板の選択中のリンクの色)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_ALINK_COLOR"); ?></div>
+					<?php echo $form["system"]->ErrMessage("BBS_ALINK_COLOR", "<div class='errmsg'>色の形式が不正です。</div>"); ?>
 					<div class="line"></div>
 					<div class="setting-key-name"><div class="setting-key-label">BBS_VLINK_COLOR</div><div class="setting-key-summary"><div>(掲示板の表示済みのリンクの色)</div></div></div>
 					<div class="input"><?php echo $form["design"]->Text("BBS_VLINK_COLOR"); ?></div>
+					<?php echo $form["system"]->ErrMessage("BBS_VLINK_COLOR", "<div class='errmsg'>色の形式が不正です。</div>"); ?>
 					<div class="line"></div>
 					<input type="hidden" name="bbs" value="<?php echo $bbs; ?>">
 					<input type="hidden" name="mode" value="design">
