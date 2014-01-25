@@ -1,517 +1,394 @@
-var isMSIE = /*@cc_on!@*/false;
-var KeyState = {
-		message : { shiftkey : false } 
-	};
+(function (undefined) {
+	var isMSIE = /*@cc_on!@*/false;
 	
-String.prototype.genresline = function (num) {
-	
-	var fileds = this.split("<>");
-	
-	if(fileds.length < 4)
-	{
-		for(var i=0; i < 4; i++)
-		{
-			fileds[i] = "ここ壊れてます"
-		}
+	function BBSDat (thread) {
+		this.thread = thread;
+		this.ajax = new Ajax();
+		this.init();
 	}
 	
-	var resline = "";
-	resline += "<dt id=\"a" + num + "\">" + num + " ： ";
-	resline += "<span class=\"name\"><b>" + fileds[0] + "</b></span> ";
-	resline += "<span class=\"info\">" + "[" + fileds[1] + "]";
-	resline += "：" + fileds[2] + "</span></dt>";
-	resline += "<dd>" + fileds[3] + "</dd>";
-	resline += "\n";
-	
-	return resline;
-}
-
-String.prototype.getreslines = function () {
-	return this.split("\n");
-}
-function DatInfo () {
-		this.datdata = "";
-		this.datrange = 0;
-		this.lastmodified = "Thu, 01 Jun 1970 00:00:00 GMT";
-		
-		this.init = function () {
-			this.datdata = "";
-			this.datrange = 0;
+	(function (p) {
+		p.init = function () {
+			this.data = "";
 			this.lastmodified = "Thu, 01 Jun 1970 00:00:00 GMT";
 		};
-
-		this.set = function (buff, length) {
-			if(buff != "")
-			{
-				this.datrange = length;
-				this.datdata = buff;
-			}
-		};
-
-		this.append = function (buff, length) {
-			
-			if((buff.length > 0) && (buff.charCodeAt(0) != 0x0a) && (this.datdata.length > 0))
-			{
-				alert(buff);
-				this.ifdelres();
-			}
-			else if(this.datdata.length == 0)
-			{
-				this.datrange = length;
-				this.datdata = buff;
-			}
-			else if((buff.length > 2) && (buff.charCodeAt(0) == 0x0a))
-			{
-				this.datrange += length - 1;
-				this.datdata += buff.substr(1, length - 1);
-			}
-			else if(buff.length == 2)
-			{
-				this.datrange += 1;
-				this.datdata += buff;
-			}
-		};
-
-		this.ifdelres = function () {
-			window.alert("あぼ～んがあったようです。取得し直します。");
-			this.init();
-			this.ajax_getdat(true);
-		};
-
-		this.getrequset_range = function () {
-			if(this.datrange > 0)
-			{
-				return  (this.datrange - 1) ;
-			}
-			else
-			{
-				return this.datrange;
-			}
-	
-		};
-
-		this.getrenderhtml = function (options) {
-			var htmlresbodys = "";
-			var reslines = this.datdata.getreslines();
+		p.renderHTML = function (options) {
+			var html = [];
+			var lines = this.datdata.getResLines();
 			var rescnt;
 			
 			if(options.end == null)
 			{
-				options.end = reslines.length;
+				options.end = lines.length;
 			}
 			
-			rescnt = reslines.length;
+			rescnt = lines.length;
 		
 			if((options.first == true) && (options.start > 1))
 			{
-				htmlresbodys += reslines[0].genresline(1);
+				html.push(lines[0].createResLine(1));
 			}
 			
-			for(i= (options.start - 1) ; ((i < options.end) && (i < rescnt)) ; i++)
+			for(var i = (options.start - 1) ; ((i < options.end) && (i < rescnt)) ; i++)
 			{
-				if(reslines[i] == "")
+				if(lines[i] == "")
 				{
 					break;
 				}
 				
-				htmlresbodys += reslines[i].genresline(i+1);
+				html.push(lines[i].createResLine(i+1));
 			}
 			
-			return htmlresbodys;
+			return html.join("\n");
 		};
 		
-		this.update_dat = function (xmlhttp, callback_args)
-		{
-			var threadinfo = callback_args[0];
-			var parseopt = callback_args[1];
+		p.requestDat = function (callback) {
+			var url = this.thread.createDatURL();
+			var self = this;
 			
-			window.clearInterval(threadinfo.timerid);
-			document.getElementById("resbodys").innerHTML = "";
+			headers["Content-Type"] = "text/plain; charset=x-sjis";
+			headers["If-Modified-Since"] = this.lastmodified;
 			
-			threadinfo.requestcomp = true;
-			
-			if(XmlHttpHelper.getLastModefied(xmlhttp) != null)
-			{
-				this.lastmodified = XmlHttpHelper.getLastModefied(xmlhttp);
-			}
-			
-			var length = XmlHttpHelper.getContentLength(xmlhttp);	
-			
-			if(length != null)
-			{
-				length = parseInt(length);
-				if(length.toString() == "NaN")
-				{
-					window.alert("Content-Lengthのパースに失敗しました。");
-					this.init();
-					return;
-				}
-			}
-			else if((xmlhttp.status == 0) || (xmlhttp.status == 404) || (xmlhttp.status == 302))
-			{
-				window.alert("該当するスレッドは削除されたか、存在しません。");
-				return;
-			}
-			else if((xmlhttp.status != 416) && (xmlhttp.status != 304))
-			{
-				window.alert("Content-Lengthが取得できませんでした。");
-				this.init();
-				return;
-			}
-			
-			if(xmlhttp.status == 200)
-			{
-				this.set(XmlHttpHelper.getResponseText(xmlhttp), length);
-			}
-			else if(xmlhttp.status == 206)
-			{	
-				this.append(XmlHttpHelper.getResponseText(xmlhttp), length);
-			}
-			
-			else if(xmlhttp.status == 416)
-			{
-				this.ifdelres();
-			}
-			else if(xmlhttp.status == 304)
-			{
-				//処理なし
-			}
-			
-			if(parseopt)
-			{
-				threadinfo.parse_option();
-			}
-			threadinfo.rendering();
+			this.ajax.get(function (url,) {
+				callback: function (data, status) {
+					if(status !== 200 && status !== 304)
+					{
+						callback.call(self.thread, false, "通信エラーが発生しました。");
+					}
+					else if(status === 200)
+					{
+						self.data = data;
+						var lastmodified;
+						
+						if(!(lastmodified = ajax.getResponseHeader("Last-Modified")))
+						{
+							callback.call(self.thread, false, "datの最終更新日時が取得できませんでした。");
+						}
+						else
+						{
+							self.lastmodified = lastmodified;
+							callback.call(self.thread, true, "");
+						}
+					}
+				},
+				headers: headers
+			});
 		};
-	}
-var threadinfo = {
-	option : null,
-	options : { first : null, start : null, end : null},
-	urlbase : null,
-	bbs : null,
-	thread : null,
-	pastfrom : null,
-	pastto : null,
-	nextfrom : null,
-	nextto : null,
-	timerid : null,
-	requestcomp : true,
-	datInfo : new DatInfo(),
+	})(BBSDat.prototype);
 	
-	parse_option : function() {
-		var reslines = this.datInfo.datdata.getreslines();
+	function BBSThread (paths) {
+		this.requestcomp = true;
+		this.shiftkey = false;
+
+		var pathinfo = paths.split("/");
+
+		var match = window.location.pathname.match(/^.*(\/test\/read.html)/g);
 		
-		if(/^\|(\d+)n?$/.test(this.option))
+		this.urlbase = match[0].replace("test/read.html", "");
+		this.bbs = pathinfo[1];
+		this.key = pathinfo[2];
+		this.options = this.parseOptions(decodeURIComponent(pathinfo[3]));
+		
+		var self = this;
+		
+		var onKeyDown = function (e) {
+			var key = self.keyCode(e);
+			
+			if(key === 16) self.shiftkey = true;
+			if(key === 13 && self.shiftkey)
+			{
+				e.preventDefault();
+				self.postRes();
+			}
+		};
+		
+		if(window.opera)
 		{
-			var match = this.option.match(/\d+/g);
-			
-			if(/n$/.test(this.option))
-			{
-				this.options.first = false;
-			}
-			else
-			{
-				this.options.first = true;
-			}
-			
-			this.options.start = reslines.length - match[0];
-			
-			if(this.options.start < 1)
-			{
-				this.options.start = 1;
-			}
-			
-			this.options.end = reslines.length;
-		}
-		else if(/^(\d+)-(\d+)n?$/.test(this.option))
-		{
-			var match = this.option.match(/\d+/g);
-			
-			if(/n$/.test(this.option))
-			{
-				this.options.first = false;
-			}
-			else
-			{
-				this.options.first = true;
-			}
-			
-			this.options.start = match[0];
-			this.options.end   = match[1];
-		}
-		else if(/^-(\d+)n?$/.test(this.option))
-		{
-			var match = this.option.match(/\d+/g);
-			
-			if(/n$/.test(this.option))
-			{
-				this.options.first = false;
-			}
-			else
-			{
-				this.options.first = true;
-			}
-			
-			this.options.start = 1;
-			this.options.end   = match[0];
-		}
-		else if(/^(\d+)-n?$/.test(this.option))
-		{
-			var match = this.option.match(/\d+/g);
-			
-			if(/n$/.test(this.option))
-			{
-				this.options.first = false;
-			}
-			else
-			{
-				this.options.first = true;
-			}
-			
-			this.options.start = match[0];
-			this.options.end   = reslines.length;
-		}
-		else if(/^(\d+)n?$/.test(this.option))
-		{
-			var match = this.option.match(/\d+/g);
-			
-			if(/n$/.test(this.option))
-			{
-				this.options.first = false;
-			}
-			else
-			{
-				this.options.first = true;
-			}
-			
-			this.options.start = match[0];
-			this.options.end   = match[0];
-		}
-		else if(/^$/.test(this.option))
-		{
-			this.options.first = false;
-			this.options.start = 1;
-			this.options.end   = reslines.length;
+			$("#message").on("keypress", function (e) {
+				return onKeyDown(e);
+			});
 		}
 		else
 		{
-			window.alert("オプション指定が不正です。");
+			$("#message").on("keydown", function (e) {
+				return onKeyDown(e);
+			});
 		}
 		
-		this.pastfrom = this.options.start - 100;
-		if(this.pastfrom < 1)
-		{
-			this.pastfrom = 1;
-		}
-	
-		this.pastto = this.options.start - 1;
-		if(this.pastto < 1)
-		{
-			this.pastto = 1;
-		}
-	
-		this.nextfrom = this.options.end + 1;
-		this.nextto   = this.options.end + 100;
+		$("#message").on("keyup", function (e) {
+			var key = self.keyCode(e);
+			if(key === 16) self.shiftkey = false;
+		});
 		
-	},
-	
-	update_dat : function(xmlhttp, callback_args) {
-		var threadinfo = callback_args[0];
-		threadinfo.datInfo.update_dat(xmlhttp, callback_args);
-		window.location.href = "#footer";
-	},
-	
-	resdisp : function(option) {
-		this.option = option;
-		this.ajax_getdat(true);
-	},
-	
-	rendering : function() {
-		document.getElementById("resbodys").innerHTML = this.datInfo.getrenderhtml(this.options);
-		var reslines = this.datInfo.datdata.getreslines();
-		var subject = reslines[0].split("<>")[4];
+		$("#name").val(Cookie.get("FROM"));
+		$("#e-mail").val(Cookie.get("mail"));
 		
-		if(subject == undefined)
-		{
-			subject = 'スレタイ不明';
-		}
+		this.datdata = new BBSDat(this);
+		this.ajax = new Ajax();
 		
-		document.title = subject;
-		document.getElementById("subject").innerHTML = subject;
-		var date = new Date();
-		var speed = (reslines.length - 1) / (Math.floor(date.getTime() / 60000) - Math.floor(this.thread / 60)) * 60 * 24;
-		document.getElementById("speed").innerHTML = "<strong>Speed:" + speed + "</strong>";
-		document.getElementById("size").innerHTML = this.datInfo.datrange;
-	},
-	
-	ajax_reload : function(xmlhttp, callback_args) {
-		var threadinfo = callback_args[0];
-		window.clearInterval(threadinfo.timerid);
-	
-		var param = document.getElementById("resparams");
-		if( (xmlhttp.status == 200) && (/<!-- 2ch_X:error -->/.test(xmlhttp.responseText)) )
-		{
-			msgwindow = window.open();
-			msgwindow.document.write(xmlhttp.responseText);
-		}
-		param.elements["MESSAGE"].value = "";
-		
-		threadinfo.options.end = null;
-		
-		threadinfo.ajax_getdat(false);
-	},
-	
-	res_post : function(iskeybord) {
-		var info = document.getElementById("info");	
-	
-		var param = document.getElementById("resparams");
-	
-		var bbs = this.bbs;
-		var key = this.thread
-		
-		var message = param.elements["MESSAGE"];
-		
-		var url = this.urlbase + "test/bbs.cgi?guid=On";
-	
-		var headers = new Array();
-		
-		headers["Referer"] = this.urlbase + "/" + bbs + "/";	
-		headers["Content-Type"] = "application/x-www-form-urlencoded";
-		
-		var postprm = new Array();
-	
-		postprm["bbs"] = bbs;
-		postprm["key"] = key;
-		postprm["FROM"] = param.elements["FROM"].value;
-		postprm["mail"] = param.elements["mail"].value;
-		postprm["MESSAGE"] = param.elements["MESSAGE"].value;
-		
-		postprm["submit"] = "書き込む";
-		postprm["utn"] = "utn";
-		postprm["time"] = "1";
-		postprm["suka"] = "pontan";
-		
-		var count = 3;
-		
-		this.timerid = window.setInterval( function () {
-			count++;
-			var str = "書き込み中";
-			for(var i=0; i < count; i++)
-			{
-				str += ".";
-			}
-			
-			if(count > 20)
-			{
-				count = 0;
-			}
-			
-			document.getElementById("resbodys").innerHTML = "<span id='waiting'><b>" + str + "</b></span>";
-		}, 100);
-		
-		http_post(this.ajax_reload, [this], url, null, headers, postprm, EscapeSJIS);
-		
-		return false;
-	},
-	
-	ajax_getdat : function(parseopt) {
-		if(this.requestcomp == false)
-		{
-			window.alert("通信中です...");
-			return;
-		}
-		
-		this.requestcomp = false;
-		
-		var param = document.getElementById("resparams");
-	
-		var bbs = this.bbs;
-		var key = this.thread
-		
-		var url = this.urlbase + bbs + "/dat/" + key + ".dat?" + (new Date()).getTime();
-	
-		var headers = new Array();
-		var mimetype = "text/plain; charset=shift_jis";
-
-		headers["Content-Type"] = "text/plain; charset=x-sjis";
-		headers["If-Modified-Since"] = this.datInfo.lastmodified;
-		
-		//データの差分取得時にはAccept-Encodingにgzipなどの圧縮してデータを返す指定がなされていてはならず、
-		//identiferなどを指定する必要があるが、XMLHTTPRequestは勝手にgzip, deflateとつけてしまい、
-		//また、XMLHTTPRequestのsetRequestHeaderはAccept-Encodingの変更が不可能らしい。
-		//よって、差分取得は未対応とする。
-		//headers["Accept-Encoding"] = "identity";
-		//headers["Range"] = "bytes=" + this.datInfo.getrequset_range() + "-";
-		
-		document.getElementById("resbodys").innerHTML = "<span id='waiting'><b>読み込み中...</b></span>";
-		var count = 3;
-		
-		this.timerid = window.setInterval(function () {
-			count++;
-			var str = "読み込み中";
-			for(var i=0; i < count; i++)
-			{
-				str += ".";
-			}
-			
-			if(count > 20)
-			{
-				count = 0;
-			}
-			
-			document.getElementById("resbodys").innerHTML = "<span id='waiting'><b>" + str + "</b></span>";
-		}, 100);
-		
-		http_get(this.update_dat, [this, parseopt], url, mimetype, headers);
+		this.loadThread(function () {
+			this.terminateLoadingView();
+			this.render();
+		});
 	}
-};
-window.onload = function () { init(); };
-
-function init()
-{	
-	var message = document.getElementById("message");
-	standardize(message);
-	message.addEventListener("keydown", 
-		function (evt) {
-					if(!evt)
+	
+	(function (p) {
+		p.keyCode = function (e) {
+			if(document.all) return e.originalEvent.keyCode;
+			else if(document.getElementById) return (e.originalEvent.keyCode) ? e.originalEvent.keyCode : e.originalEvent.charCode;
+			else if(document.layers) return e.originalEvent.which;
+			else return 0;
+		};
+		p.createDatURL = function () {
+			return (this.bbs + "/dat/" + this.key + ".dat?" + (new Date()).getTime());
+		};
+		p.createPostURL = function () {
+			return (this.urlbase + "test/bbs.cgi?guid=On";);
+		};
+		p.loadThread = function (callback) {
+			if(this.requestcomp == false)
+			{
+				window.alert("通信中です...");
+				return;
+			}
+			
+			this.requestcomp = false;
+			
+			
+			this.datdata.requestDat(function (result, message) {
+				if(!result) {
+					alert(message);
+				}
+				else
+				{
+					callback.call(this);
+				}
+			});
+		};
+		p.postRes = function () {
+			var self = this;
+			var params = $("#resparams");
+		
+			this.startSendingPage();
+			
+			this.ajax.post(this.createPostURL(), {
+				callback: function (data, status) {
+					self.terminateSendingView();
+				
+					var params = $("#resparams");
+					if( (status == 200) && (/<!-- 2ch_X:error -->/.test(data)) )
 					{
-						var evt = event;
+						msgwindow = window.open();
+						msgwindow.document.write(data);
 					}
-					if(evt.keyCode == 16){ KeyState.message.shiftkey = true; } 
-					if((evt.keyCode == 13)  && (KeyState.message.shiftkey == true))
-					{ 
-						evt.preventDefault();
-						threadinfo.res_post(true);
-						return false;
-					} }, true);
-	message.addEventListener("keyup",
-		function (evt) { 
-					if(!evt)
-					{
-						var evt = event;
-					}
-					if(evt.keyCode == 16) {KeyState.message.shiftkey = false; } }, true);
+					params.find("#message").val("");
 					
-
-	var match = location.pathname.match(/^.*(\/test\/read.html)/g);
-	threadinfo.urlbase = match[0].replace("test/read.html", "");
+					self.options.end = null;
+				},
+				params: {
+					bbs: bbs,
+					key: key,
+					FROM: params.find("input[name='FROM']").val(),
+					mail: params.find("input[name='mail']").val(),
+					MESSAGE: params.find("#message").val(),
+					submit: "書き込む",
+					utn: "utn",
+					time: params.find("input[name='time']").val(),
+					suka: params.find("input[name='suka']").val()
+				},
+				headers: {
+					"Referer": this.urlbase + "/" + this.bbs + "/",
+					"Content-Type": "application/x-www-form-urlencoded"
+				},
+				encoder: EscapeSJIS
+			});
+			
+			this.loadThread(function () {
+				this.render();
+			});
+		};
+		p.reload = function () {
+			this.loadThread():
+		};
+		p.startLoadingView = function () {
+			var count = 3;
+			
+			this.timerid = window.setInterval(function () {
+				count++;
+				var str = "読み込み中";
+				for(var i=0; i < count; i++)
+				{
+					str += ".";
+				}
+				
+				if(count > 20)
+				{
+					count = 0;
+				}
+				
+				$("#resbodys").html("<span id='waiting'><b>" + str + "</b></span>");
+			}, 100);
+		};
+		p.terminateLoadingView = function () {
+			window.clearInterval(this.timerid);
+		};
+		p.startSendingPage = function () {
+			var count = 3;
+			
+			this.timerid = window.setInterval( function () {
+				count++;
+				var str = "書き込み中";
+				for(var i=0; i < count; i++)
+				{
+					str += ".";
+				}
+				
+				if(count > 20)
+				{
+					count = 0;
+				}
+				
+				$("#resbodys").html("<span id='waiting'><b>" + str + "</b></span>");
+			}, 100);
+		};
+		p.terminateSendingView = function () {
+			window.clearInterval(this.timerid);
+		};
+		render : function() {
+			$("#resbodys").html(this.datdata.renderHTML(this.options);
+			var lines = this.datdata.getResLines();
+			var subject = lines[0].split("<>")[4];
+			
+			if(subject == undefined)
+			{
+				subject = 'スレタイ不明';
+			}
+			
+			$("title").html(subject);
+			$("#subject").html(subject);
+			var date = new Date();
+			var speed = (lines.length - 1) / (Math.floor(date.getTime() / 60000) - Math.floor(this.key / 60)) * 60 * 24;
+			$("#speed").html("<strong>Speed:" + speed + "</strong>");
+			$(#"size").html(this.datdata.data.length - 1);
+		};
+		p.parseOptions = function(options) {
+			var reslines = this.datdata.data.getResLines();
+			
+			if(/^\|(\d+)n?$/.test(options))
+			{
+				var match = options.match(/\d+/g);
+				
+				if(/n$/.test(options))
+				{
+					this.options.first = false;
+				}
+				else
+				{
+					this.options.first = true;
+				}
+				
+				this.options.start = reslines.length - match[0];
+				
+				if(this.options.start < 1)
+				{
+					this.options.start = 1;
+				}
+				
+				this.options.end = reslines.length;
+			}
+			else if(/^(\d+)-(\d+)n?$/.test(options))
+			{
+				var match = options.match(/\d+/g);
+				
+				if(/n$/.test(options))
+				{
+					this.options.first = false;
+				}
+				else
+				{
+					this.options.first = true;
+				}
+				
+				this.options.start = match[0];
+				this.options.end   = match[1];
+			}
+			else if(/^-(\d+)n?$/.test(options))
+			{
+				var match = options.match(/\d+/g);
+				
+				if(/n$/.test(options))
+				{
+					this.options.first = false;
+				}
+				else
+				{
+					this.options.first = true;
+				}
+				
+				this.options.start = 1;
+				this.options.end   = match[0];
+			}
+			else if(/^(\d+)-n?$/.test(options))
+			{
+				var match = options.match(/\d+/g);
+				
+				if(/n$/.test(options))
+				{
+					this.options.first = false;
+				}
+				else
+				{
+					this.options.first = true;
+				}
+				
+				this.options.start = match[0];
+				this.options.end   = reslines.length;
+			}
+			else if(/^(\d+)n?$/.test(options))
+			{
+				var match = options.match(/\d+/g);
+				
+				if(/n$/.test(options))
+				{
+					this.options.first = false;
+				}
+				else
+				{
+					this.options.first = true;
+				}
+				
+				this.options.start = match[0];
+				this.options.end   = match[0];
+			}
+			else if(/^$/.test(options))
+			{
+				this.options.first = false;
+				this.options.start = 1;
+				this.options.end   = reslines.length;
+			}
+			else
+			{
+				window.alert("オプション指定が不正です。");
+			}
+			
+			this.pastfrom = this.options.start - 100;
+			if(this.pastfrom < 1)
+			{
+				this.pastfrom = 1;
+			}
+		
+			this.pastto = this.options.start - 1;
+			if(this.pastto < 1)
+			{
+				this.pastto = 1;
+			}
+		
+			this.nextfrom = this.options.end + 1;
+			this.nextto   = this.options.end + 100;
+			
+		};
+	})(BBSThread.prototype);
 	
-	var thisFile = location.pathname.match(/^.*\/test\/read.html/);
-	var pathstr = location.pathname.replace(thisFile, "");
-	var pathinfo = pathstr.split("/");
-
-	if(pathinfo.length < 4)
-	{
-		window.alert("URLの形式が不正です。");
-		return;
-	}
-	
-	threadinfo.bbs = pathinfo[1];
-	threadinfo.thread = pathinfo[2];
-	threadinfo.option = decodeURIComponent(pathinfo[3]);
-	
-	document.getElementById("name").value = Cookie.get("FROM");
-	document.getElementById("e-mail").value = Cookie.get("mail");
-	
-	threadinfo.ajax_getdat(true);
-}
+	window.BBSDat = BBSDat;
+	window.BBSThread = BBSThread;
+})();

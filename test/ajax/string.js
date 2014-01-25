@@ -1,4 +1,4 @@
-(function () {
+(function (undefined) {
 	String.fromTemplate = function () {
 		var lines = Array.prototype.slice.call(arguments, 0),
 			params = args.pop();
@@ -31,5 +31,31 @@
 				else throw new Error("ProgramError.");
 			});
 		}
+	};
+	String.prototype.createResLine = function (num) {
+		
+		var fileds = this.split("<>");
+		
+		if(fileds.length < 4)
+		{
+			for(var i=0; i < 4; i++)
+			{
+				fileds[i] = "Ç±Ç±âÛÇÍÇƒÇ‹Ç∑"
+			}
+		}
+		
+		return String.fromTemplate(
+			'<dt id="a{num}">{num} ÅF <span class="name"><b>{name}</b></span> <span class="info">ÅF{mail}</span></dt>',
+			'<dd>{body}</dd>
+		{
+			num: num,
+			name: fileds[0],
+			mail: fileds[1],
+			body: fileds[2]
+		});
+	};
+	
+	String.prototype.getResLines = function () {
+		return this.split("\n");
 	};
 })();
