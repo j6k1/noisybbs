@@ -1,19 +1,19 @@
 (function (undefined) {
 	function Ajax() {
 		this.xhr = (function () {
-			if(window.XMLHTTPRequest) return new XMLHTTPRequest();
+			if(window.XMLHttpRequest) return new XMLHttpRequest();
 			else {
 				try {
 					return new ActiveXObject("MSXML2.XMLHTTP 6.0");
-				} catch {};
+				} catch (e) {};
 				try {
 					return new ActiveXObject("MSXML2.XMLHTTP 3.0");
-				} catch {};
+				} catch (e) {};
 				
 				try {
 					return new ActiveXObject("Microsoft.XMLHTTP");
-				} catch {};
-				throw new Error("XMLHTTPRequestに未対応のブラウザです。");
+				} catch (e) {};
+				throw new Error("XMLHttpRequestに未対応のブラウザです。");
 			}
 		})();
 	};
@@ -61,16 +61,13 @@
 				}
 			}
 			
-			if(method === "POST" || method === "PUT")
+			if(method != "POST" && method != "PUT")
 			{
 				params = null;
-			}
-			else
-			{
-=				if(url.indexOf("?") != -1) url += "?" + params;
+				if(url.indexOf("?") != -1) url += "?" + params;
 				else url += "&" + params;
 			}
-
+			
 			xhr.open(method, url);
 			
 			var headers = (function () {
@@ -108,12 +105,12 @@
 		p.get = function (url, options) {
 			return this.send(url, "GET", options);
 		};
-		p.get = function (url, options) {
+		p.post = function (url, options) {
 			return this.send(url, "POST", options);
 		};
 	})(Ajax.prototype);
 	
-	Ajax.buildQuery = (params, encoder) {
+	Ajax.buildQuery = function (params, encoder) {
 		var pairs = [];
 		
 		if(!encoder) encoder = encodeURIComponent;
@@ -123,7 +120,7 @@
 			pairs.push(encoder(key) + "=" + encoder(params[key]));
 		}
 		
-		return pair.join("&");
+		return pairs.join("&");
 	};
 	
 	window.Ajax = Ajax;

@@ -1,7 +1,7 @@
 (function (undefined) {
 	String.fromTemplate = function () {
 		var lines = Array.prototype.slice.call(arguments, 0),
-			params = args.pop();
+			params = lines.pop();
 		
 		if(Object.prototype.toString.call(params) === "[object String]")
 		{
@@ -34,24 +34,25 @@
 	};
 	String.prototype.createResLine = function (num) {
 		
-		var fileds = this.split("<>");
+		var fields = this.split("<>");
 		
-		if(fileds.length < 4)
+		if(fields.length < 4)
 		{
 			for(var i=0; i < 4; i++)
 			{
-				fileds[i] = "ここ壊れてます"
+				fields[i] = "ここ壊れてます"
 			}
 		}
 		
 		return String.fromTemplate(
-			'<dt id="a{num}">{num} ： <span class="name"><b>{name}</b></span> <span class="info">：{mail}</span></dt>',
-			'<dd>{body}</dd>
+			'<dt id="a{num}">{num} ： <span class="name"><b>{name}</b></span> <span class="info">[{mail}]：{dateid}</span></dt>',
+			'<dd>{body}</dd>',
 		{
 			num: num,
-			name: fileds[0],
-			mail: fileds[1],
-			body: fileds[2]
+			name: fields[0],
+			mail: fields[1],
+			dateid: fields[2],
+			body: fields[3]
 		});
 	};
 	

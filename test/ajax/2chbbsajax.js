@@ -14,7 +14,7 @@
 		};
 		p.renderHTML = function (options) {
 			var html = [];
-			var lines = this.datdata.getResLines();
+			var lines = this.data.getResLines();
 			var rescnt;
 			
 			if(options.end == null)
@@ -45,11 +45,12 @@
 		p.requestDat = function (callback) {
 			var url = this.thread.createDatURL();
 			var self = this;
+			var headers = {};
 			
 			headers["Content-Type"] = "text/plain; charset=x-sjis";
 			headers["If-Modified-Since"] = this.lastmodified;
 			
-			this.ajax.get(function (url,) {
+			this.ajax.get(url, {
 				callback: function (data, status) {
 					if(status !== 200 && status !== 304)
 					{
@@ -60,7 +61,7 @@
 						self.data = data;
 						var lastmodified;
 						
-						if(!(lastmodified = ajax.getResponseHeader("Last-Modified")))
+						if(!(lastmodified = self.ajax.getResponseHeader("Last-Modified")))
 						{
 							callback.call(self.thread, false, "datの最終更新日時が取得できませんでした。");
 						}
@@ -81,13 +82,12 @@
 		this.shiftkey = false;
 
 		var pathinfo = paths.split("/");
-
+		
 		var match = window.location.pathname.match(/^.*(\/test\/read.html)/g);
 		
 		this.urlbase = match[0].replace("test/read.html", "");
 		this.bbs = pathinfo[1];
 		this.key = pathinfo[2];
-		this.options = this.parseOptions(decodeURIComponent(pathinfo[3]));
 		
 		var self = this;
 		
@@ -126,9 +126,19 @@
 		this.datdata = new BBSDat(this);
 		this.ajax = new Ajax();
 		
+		this.startLoadingView();
+		
 		this.loadThread(function () {
 			this.terminateLoadingView();
+			this.parseOptions(decodeURIComponent(pathinfo[3]));
 			this.render();
+		}, function () {
+			if(this.requestcomp == false)
+			{
+				window.alert("通信中です...");
+				return false;
+			}
+			return true;
 		});
 	}
 	
@@ -140,17 +150,13 @@
 			else return 0;
 		};
 		p.createDatURL = function () {
-			return (this.bbs + "/dat/" + this.key + ".dat?" + (new Date()).getTime());
+			return (this.urlbase + this.bbs + "/dat/" + this.key + ".dat?" + (new Date()).getTime());
 		};
 		p.createPostURL = function () {
-			return (this.urlbase + "test/bbs.cgi?guid=On";);
+			return (this.urlbase + "test/bbs.cgi?guid=On");
 		};
-		p.loadThread = function (callback) {
-			if(this.requestcomp == false)
-			{
-				window.alert("通信中です...");
-				return;
-			}
+		p.loadThread = function (callback, beforeLoad) {
+			if(beforeLoad && !beforeLoad.call(this)) return;
 			
 			this.requestcomp = false;
 			
@@ -184,10 +190,13 @@
 					params.find("#message").val("");
 					
 					self.options.end = null;
+					self.loadThread(function () {
+						this.render();
+					});
 				},
 				params: {
-					bbs: bbs,
-					key: key,
+					bbs: self.bbs,
+					key: self.key,
 					FROM: params.find("input[name='FROM']").val(),
 					mail: params.find("input[name='mail']").val(),
 					MESSAGE: params.find("#message").val(),
@@ -202,13 +211,13 @@
 				},
 				encoder: EscapeSJIS
 			});
-			
-			this.loadThread(function () {
-				this.render();
-			});
 		};
 		p.reload = function () {
-			this.loadThread():
+			this.startLoadingView();
+			this.loadThread(function () {
+				this.terminateLoadingView();
+				this.render();
+			});
 		};
 		p.startLoadingView = function () {
 			var count = 3;
@@ -254,9 +263,9 @@
 		p.terminateSendingView = function () {
 			window.clearInterval(this.timerid);
 		};
-		render : function() {
-			$("#resbodys").html(this.datdata.renderHTML(this.options);
-			var lines = this.datdata.getResLines();
+		p.render = function() {
+			$("#resbodys").html(this.datdata.renderHTML(this.options));
+			var lines = this.datdata.data.getResLines();
 			var subject = lines[0].split("<>")[4];
 			
 			if(subject == undefined)
@@ -269,10 +278,12 @@
 			var date = new Date();
 			var speed = (lines.length - 1) / (Math.floor(date.getTime() / 60000) - Math.floor(this.key / 60)) * 60 * 24;
 			$("#speed").html("<strong>Speed:" + speed + "</strong>");
-			$(#"size").html(this.datdata.data.length - 1);
+			$("#size").html(this.datdata.data.length - 1);
 		};
 		p.parseOptions = function(options) {
 			var reslines = this.datdata.data.getResLines();
+			
+			this.options = {};
 			
 			if(/^\|(\d+)n?$/.test(options))
 			{
