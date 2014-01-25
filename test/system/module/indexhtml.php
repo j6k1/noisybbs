@@ -41,6 +41,12 @@
 			$BBS_BG_PICTURE = htmlspecialchars($setting->BBS_BG_PICTURE, ENT_QUOTES | ENT_HTML401);
 			$BBS_TITLE_PICTURE = htmlspecialchars($setting->BBS_TITLE_PICTURE, ENT_QUOTES | ENT_HTML401);
 			$BBS_TITLE = htmlspecialchars($setting->BBS_TITLE, ENT_QUOTES | ENT_HTML401);
+			$BBS_BG_COLOR = Util::valid_css_color_val($setting->BBS_BG_COLOR);
+			$BBS_TEXT_COLOR = Util::valid_css_color_val($setting->BBS_TEXT_COLOR);
+			$BBS_TITLE_COLOR = Util::valid_css_color_val($setting->BBS_TITLE_COLOR);
+			$BBS_LINK_COLOR = Util::valid_css_color_val($setting->BBS_LINK_COLOR);
+			$BBS_VLINK_COLOR = Util::valid_css_color_val($setting->BBS_VLINK_COLOR);
+			$BBS_ALINK_COLOR = Util::valid_css_color_val($setting->BBS_ALINK_COLOR);
 			
 			$output->PrintStr(<<<EOM
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -54,17 +60,17 @@
 <style>
 body,td,a,p,.h{
 	font-family:arial,sans-serif;
-	background-color: {$setting->BBS_BG_COLOR};
+	background-color: {$BBS_BG_COLOR};
 }
 body{
 	background-image: url('{$BBS_BG_PICTURE}');
-	color: {$setting->BBS_TEXT_COLOR};
+	color: {$BBS_TEXT_COLOR};
 }
 #title{
 	font-size: 32px;
 	padding-bottom: 20px;
 	background-image: url('{$BBS_TITLE_PICTURE}');
-	color: {$setting->BBS_TITLE_COLOR}
+	color: {$BBS_TITLE_COLOR}
 }
 #container {
 	width: 640px;
@@ -128,13 +134,13 @@ div.thread{
 	padding-right: 0px;
 }
 a:link {
-	color: {$setting->BBS_LINK_COLOR};
+	color: {$BBS_LINK_COLOR};
 }
 a:visited {
-	color: {$setting->BBS_VLINK_COLOR};
+	color: {$BBS_VLINK_COLOR};
 }
 a:hover {
-	color: {$setting->BBS_ALINK_COLOR};
+	color: {$BBS_ALINK_COLOR};
 }
 #form {
 	text-align: left;
