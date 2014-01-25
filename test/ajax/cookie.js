@@ -13,7 +13,9 @@ var Cookie = (function () {
 		{
 			var pair = cookies[i].replace(/^ +| +$/, "").split("=");
 			
-			Cookie.values[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+			try {
+				Cookie.values[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+			} catch(e) {};
 		}
 	})();
 	
