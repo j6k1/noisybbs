@@ -53,7 +53,7 @@
 			mail: fields[1],
 			dateid: fields[2],
 			body: fields[3].replace(
-				/(<[^>]*>)(((https?:)(\/\/[-_.!~*\'()a-zA-Z0-9;?:\@&=+\$,%#]+))[-_.!~*\'()a-zA-Z0-9;\/?:|\@&=+\$,%#]+)/g,
+				/(<[^>]*>)|(((https?:)(\/\/[-_.!~*\'()a-zA-Z0-9;?:\@&=+\$,%#]+))[-_.!~*\'()a-zA-Z0-9;\/?:|\@&=+\$,%#]+)/g,
 				function (str, tag, url) {
 					if(tag) return tag;
 					url = url.replace(/&/g, "&amp;");
