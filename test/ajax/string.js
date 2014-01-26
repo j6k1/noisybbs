@@ -54,7 +54,7 @@
 			dateid: fields[2],
 			body: fields[3].replace(
 				/(<[^>]*>)(((https?:)(\/\/[-_.!~*\'()a-zA-Z0-9;?:\@&=+\$,%#]+))[-_.!~*\'()a-zA-Z0-9;\/?:|\@&=+\$,%#]+)/g,
-				function (tag, url) {
+				function (str, tag, url) {
 					if(tag) return tag;
 					url = url.replace(/&/g, "&amp;");
 					return '<a href="' + url + '">' + url + '</a>';
