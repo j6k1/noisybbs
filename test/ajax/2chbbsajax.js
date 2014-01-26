@@ -200,6 +200,7 @@
 			else if((m = path.match(/^\/(:bbs)\/(:key)\/(:pastfrom)-(:pastto)?$/)))
 			{
 				e.preventDefault();
+				if(!self.options) return;
 				var bbs = self.bbs,
 					key = self.key,
 					options = self.pastfrom + "-" + self.pastto;
@@ -209,6 +210,7 @@
 			else if((m = path.match(/^\/(:bbs)\/(:key)\/(:nextfrom)-(:nextto)?$/)))
 			{
 				e.preventDefault();
+				if(!self.options) return;
 				var bbs = self.bbs,
 					key = self.key,
 					options = self.nextfrom + "-" + self.nextto;
