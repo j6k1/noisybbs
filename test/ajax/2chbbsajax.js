@@ -90,9 +90,9 @@
 	};
 	
 	Rooter.dispatch = function (thread, paths) {
-		var	bbs = pathinfo[1],
-			key = pathinfo[2],
-			options = pathinfo[3] || "";
+		var	bbs = paths[1],
+			key = paths[2],
+			options = paths[3] || "";
 		
 		if(thread.bbs != bbs || thread.key != key) thread.datdata.init();
 		
@@ -114,8 +114,8 @@
 	};
 	
 	Rooter.readPath = function (src) {
-		if(src.test(/^\/(:bbs)\/index.html$/)) return src;
-		else if(src.test(/^#!ID\/(\d+)(-\d+)?$/)) return src.substr(2);
+		if(/^\/(:bbs)\/index.html$/.test(src)) return src;
+		else if(/^#!ID\/(\d+)(-\d+)?$/.test(src)) return src.substr(2);
 		return src;
 	};
 	
@@ -162,10 +162,9 @@
 			if(key === 16) self.shiftkey = false;
 		});
 		
-		$("#resparams").submit(function () {
+		$("#resparams").submit(function (e) {
 			e.preventDefault();
 			self.postRes();
-			
 			return false;
 		});
 		
@@ -178,11 +177,16 @@
 		this.startLoadingView();
 		Rooter.dispatch(this, paths.split("/"));
 		
-		$("a").on("click", function (e) {
+		$("a").click(function (e) {
 			var m,
-				path = Rooter.readPath($(this).attr("src"));
-				
-			if((m = path.match(/^ID\/(\d+)(-\d+)?$/)))
+				path = Rooter.readPath($(this).attr("href"));
+			e.preventDefault();
+			if(path === "/:reload")
+			{
+				e.preventDefault();
+				self.reload();
+			}
+			else if((m = path.match(/^ID\/(\d+)(-\d+)?$/)))
 			{
 				if(!m[2]) window.location.hash = "a" + m[2];
 			}
@@ -197,7 +201,7 @@
 				var bbs = self.bbs,
 					key = self.key,
 					options = self.pastfrom + "-" + self.pastto;
-				Rooter.dispatch(self, m);
+				Rooter.dispatch(self, ["", bbs, key, options]);
 			}
 			else if((m = path.match(/^\/(:bbs)\/(:key)\/(:nextfrom)-(:nextto)?$/)))
 			{
@@ -205,7 +209,7 @@
 				var bbs = self.bbs,
 					key = self.key,
 					options = self.nextfrom + "-" + self.nextto;
-				Rooter.dispatch(self, m);
+				Rooter.dispatch(self, ["", bbs, key, options]);
 			}
 			else if((m = path.match(/^\/(:bbs)\/(:key)\/([^\/]+)?$/)))
 			{
@@ -213,7 +217,7 @@
 				var bbs = self.bbs,
 					key = self.key,
 					options = m[3];
-				Rooter.dispatch(self, m);
+				Rooter.dispatch(self, ["", bbs, key, options]);
 			}
 			else if((m = path.match(/^\/([^\/]+)\/([^\/]+)\/([^\/]+)?$/)))
 			{
@@ -221,7 +225,7 @@
 				var bbs = m[1],
 					key = m[2],
 					options = m[3];
-				Rooter.dispatch(self, m);
+				Rooter.dispatch(self, ["", bbs, key, options]);
 			}
 		});
 	}
@@ -246,6 +250,7 @@
 			
 			
 			this.datdata.requestDat(function (result, message) {
+				this.requestcomp = true;
 				if(!result) {
 					alert(message);
 				}

@@ -9,9 +9,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title></title>
 
-	<script type="text/javascript" src="../../../ajax/ecl.js"></script> <!-- Ajax -->
-	<script type="text/javascript" src="../../../ajax/string.js"></script> <!-- Ajax -->
-	<script type="text/javascript" src="../../../ajax/vendor/jquery-1.8.3.min.js"></script> <!-- Ajax -->
+	<script type="text/javascript" src="../../../ajax/ecl.js"></script>
+	<script type="text/javascript" src="../../../ajax/string.js"></script>
+	<script type="text/javascript" src="../../../ajax/vendor/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript" src="../../../ajax/ajax.js"></script> <!-- Ajax -->
 	<script type="text/javascript" src="../../../ajax/ajaxlib.js"></script> <!-- Ajax -->
 	<script type="text/javascript" src="../../../ajax/cookie.js"></script> <!-- Ajax -->
@@ -47,7 +47,7 @@ $(window).ready(function () {
 
 <div id="footer">
 <hr class="footer"><a href="#header">↑</a> <a href="/:bbs/index.html";'>掲示板に戻る</a> <a href="/:bbs/:key/">全部</a> <a href="/:bbs/:key/:pastfrom-:pastto">前100</a> <a href="/:bbs/:key/:nextfrom-:nextto">次100</a> <a href="/:bbs/:key/|50");'>最新50</a>
-<a href="javascript:threadinfo.ajax_getdat();">新着レスを表示</a>
+<a href="/:reload">新着レスを表示</a>
 <hr size="1" class="footer">
 </div>
 <form action="" utn="utn" id="resparams">
@@ -56,7 +56,7 @@ $(window).ready(function () {
  <textarea name="MESSAGE" id="message" rows="6" erap="off"></textarea><br>
  <input type="hidden" name="time" value="">
  <input type="hidden" name="suka" value="">
- <input type="button" value="書き込む【Shift+Enter】" id="submit"><br>
+ <input type="submit" value="書き込む【Shift+Enter】" id="submit"><br>
  </form><br>
 </span><br style="clear:both;">
 </body>
