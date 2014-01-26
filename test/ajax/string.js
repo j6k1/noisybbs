@@ -52,7 +52,12 @@
 			name: fields[0],
 			mail: fields[1],
 			dateid: fields[2],
-			body: fields[3]
+			body: fields[3].replace(
+				/((https?:)(\/\/[-_.!~*\'()a-zA-Z0-9;?:\@&=+\$,%#]+))[-_.!~*\'()a-zA-Z0-9;\/?:|\@&=+\$,%#]+/g,
+				function (url) {
+					url = url.replace(/&/g, "&amp;");
+					return '<a href="' + url + '">' + url + '</a>';
+				})
 		});
 	};
 	
