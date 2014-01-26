@@ -349,14 +349,24 @@
 				}
 				$form["tailres"]->setElementValue("tailres", $txt);
 			break;
-				case "indexhtml":
+			
+			case "indexhtml":
 			$ret = IndexHtml::getInstance()->WriteData();
 
 			if(ErrInfo::IsErr($ret))
 			{
 				AdminUtil::OutPutErrHtml($ret->sysmsg, 
 					"{$baseurl}/admin/setting.php/{$bbs}");
-			}	
+			}
+			
+			$ret = SubbackHtml::getInstance()->WriteData();
+			
+			if(ErrInfo::IsErr($ret))
+			{
+				AdminUtil::OutPutErrHtml($ret->sysmsg, 
+					"{$baseurl}/admin/setting.php/{$bbs}");
+			}
+			
 			$indexupdate = true;
 			
 			break;
