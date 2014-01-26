@@ -317,6 +317,8 @@
 					self.options.end = null;
 					self.loadThread(function () {
 						this.render();
+						var p = $("#footer").offset().top;
+						$("html, body").css("scrollTop", p);
 					});
 				},
 				params: {
