@@ -45,7 +45,7 @@
 		}
 		
 		return String.fromTemplate(
-			'<dt id="a{num}">{num} ： <span class="name"><b>{name}</b></span> <span class="info">[{mail}]：{dateid}</span></dt>',
+			'<dt id="a{num}">{num} ： <span class="name"><b>{name}</b></span> <span class="info">[{mail}] ： {dateid}</span></dt>',
 			'<dd>{body}</dd>',
 		{
 			num: num,
