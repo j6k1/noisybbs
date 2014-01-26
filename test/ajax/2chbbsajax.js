@@ -85,17 +85,51 @@
 		};
 	})(BBSDat.prototype);
 	
+	function Rooter () {
+		
+	};
+	
+	Rooter.dispatch = function (thread, paths) {
+		var	bbs = pathinfo[1],
+			key = pathinfo[2],
+			options = pathinfo[3] || "";
+		
+		if(thread.bbs != bbs || thread.key != key) thread.datdata.init();
+		
+		thread.bbs = bbs;
+		thread.key = key;
+		
+		thread.loadThread(function () {
+			this.terminateLoadingView();
+			this.parseOptions(decodeURIComponent(options));
+			this.render();
+		}, function () {
+			if(this.requestcomp == false)
+			{
+				window.alert("í êMíÜÇ≈Ç∑...");
+				return false;
+			}
+			return true;
+		});
+	};
+	
+	Rooter.readPath = function (src) {
+		if(src.test(/^\/(:bbs)\/index.html$/)) return src;
+		else if(src.test(/^#!ID\/(\d+)(-\d+)?$/)) return src.substr(2);
+		return src;
+	};
+	
+	(function (p) {
+		
+	})(Rooter.prototype);
+	
 	function BBSThread (paths) {
 		this.requestcomp = true;
 		this.shiftkey = false;
 
-		var pathinfo = paths.split("/");
-		
 		var match = window.location.pathname.match(/^.*(\/test\/read.html)/g);
 		
 		this.urlbase = match[0].replace("test/read.html", "");
-		this.bbs = pathinfo[1];
-		this.key = pathinfo[2];
 		
 		var self = this;
 		
@@ -128,6 +162,13 @@
 			if(key === 16) self.shiftkey = false;
 		});
 		
+		$("#resparams").submit(function () {
+			e.preventDefault();
+			self.postRes();
+			
+			return false;
+		});
+		
 		$("#name").val(Cookie.get("FROM"));
 		$("#e-mail").val(Cookie.get("mail"));
 		
@@ -135,18 +176,53 @@
 		this.ajax = new Ajax();
 		
 		this.startLoadingView();
+		Rooter.dispatch(this, paths.split("/"));
 		
-		this.loadThread(function () {
-			this.terminateLoadingView();
-			this.parseOptions(decodeURIComponent(pathinfo[3]));
-			this.render();
-		}, function () {
-			if(this.requestcomp == false)
+		$("a").on("click", function (e) {
+			var m,
+				path = Rooter.readPath($(this).attr("src"));
+				
+			if((m = path.match(/^ID\/(\d+)(-\d+)?$/)))
 			{
-				window.alert("í êMíÜÇ≈Ç∑...");
-				return false;
+				if(!m[2]) window.location.hash = "a" + m[2];
 			}
-			return true;
+			else if((m = path.match(/^\/(:bbs)\/index.html$/)))
+			{
+				e.preventDefault();
+				window.location.href = self.urlbase + self.bbs + "/index.html";
+			}
+			else if((m = path.match(/^\/(:bbs)\/(:key)\/(:pastfrom)-(:pastto)?$/)))
+			{
+				e.preventDefault();
+				var bbs = self.bbs,
+					key = self.key,
+					options = self.pastfrom + "-" + self.pastto;
+				Rooter.dispatch(self, m);
+			}
+			else if((m = path.match(/^\/(:bbs)\/(:key)\/(:nextfrom)-(:nextto)?$/)))
+			{
+				e.preventDefault();
+				var bbs = self.bbs,
+					key = self.key,
+					options = self.nextfrom + "-" + self.nextto;
+				Rooter.dispatch(self, m);
+			}
+			else if((m = path.match(/^\/(:bbs)\/(:key)\/([^\/]+)?$/)))
+			{
+				e.preventDefault();
+				var bbs = self.bbs,
+					key = self.key,
+					options = m[3];
+				Rooter.dispatch(self, m);
+			}
+			else if((m = path.match(/^\/([^\/]+)\/([^\/]+)\/([^\/]+)?$/)))
+			{
+				e.preventDefault();
+				var bbs = m[1],
+					key = m[2],
+					options = m[3];
+				Rooter.dispatch(self, m);
+			}
 		});
 	}
 	
