@@ -180,7 +180,7 @@
 		
 		$("a").click(function (e) {
 			var m,
-				path = Rooter.readPath($(this).attr("href"));
+				path = Rooter.readPath($(this).get(0).getAttribute("href", 2));
 
 			if(path === "/:reload")
 			{
