@@ -116,6 +116,7 @@
 	Rooter.readPath = function (src) {
 		if(/^\/(:bbs)\/index.html$/.test(src)) return src;
 		else if(/^#!ID\/(\d+)(-\d+)?$/.test(src)) return src.substr(2);
+		else if(/^#!\/.*$/.test(src)) return src.substr(2);
 		return src;
 	};
 	
@@ -180,7 +181,7 @@
 		$("a").click(function (e) {
 			var m,
 				path = Rooter.readPath($(this).attr("href"));
-			e.preventDefault();
+
 			if(path === "/:reload")
 			{
 				e.preventDefault();
@@ -188,7 +189,8 @@
 			}
 			else if((m = path.match(/^ID\/(\d+)(-\d+)?$/)))
 			{
-				if(!m[2]) window.location.hash = "a" + m[2];
+				e.preventDefault();
+				if(!m[2]) window.location.hash = "a" + m[1];
 			}
 			else if((m = path.match(/^\/(:bbs)\/index.html$/)))
 			{
@@ -201,6 +203,7 @@
 				var bbs = self.bbs,
 					key = self.key,
 					options = self.pastfrom + "-" + self.pastto;
+				window.location.hash = "#!/" + bbs + "/" + key + "/" + options;
 				Rooter.dispatch(self, ["", bbs, key, options]);
 			}
 			else if((m = path.match(/^\/(:bbs)\/(:key)\/(:nextfrom)-(:nextto)?$/)))
@@ -209,6 +212,7 @@
 				var bbs = self.bbs,
 					key = self.key,
 					options = self.nextfrom + "-" + self.nextto;
+				window.location.hash = "#!/" + bbs + "/" + key + "/" + options;
 				Rooter.dispatch(self, ["", bbs, key, options]);
 			}
 			else if((m = path.match(/^\/(:bbs)\/(:key)\/([^\/]+)?$/)))
@@ -216,15 +220,16 @@
 				e.preventDefault();
 				var bbs = self.bbs,
 					key = self.key,
-					options = m[3];
+					options = m[3] || "";
+				window.location.hash = "#!/" + bbs + "/" + key + "/" + options;
 				Rooter.dispatch(self, ["", bbs, key, options]);
 			}
 			else if((m = path.match(/^\/([^\/]+)\/([^\/]+)\/([^\/]+)?$/)))
 			{
-				e.preventDefault();
 				var bbs = m[1],
 					key = m[2],
-					options = m[3];
+					options = m[3] || "" ;
+				window.location.hash = "#!/" + bbs + "/" + key + "/" + options;
 				Rooter.dispatch(self, ["", bbs, key, options]);
 			}
 		});
@@ -409,8 +414,8 @@
 					this.options.first = true;
 				}
 				
-				this.options.start = match[0];
-				this.options.end   = match[1];
+				this.options.start = Number(match[0]);
+				this.options.end   = Number(match[1]);
 			}
 			else if(/^-(\d+)n?$/.test(options))
 			{
@@ -426,7 +431,7 @@
 				}
 				
 				this.options.start = 1;
-				this.options.end   = match[0];
+				this.options.end   = Number(match[0]);
 			}
 			else if(/^(\d+)-n?$/.test(options))
 			{
@@ -441,7 +446,7 @@
 					this.options.first = true;
 				}
 				
-				this.options.start = match[0];
+				this.options.start = Number(match[0]);
 				this.options.end   = reslines.length;
 			}
 			else if(/^(\d+)n?$/.test(options))
@@ -457,8 +462,8 @@
 					this.options.first = true;
 				}
 				
-				this.options.start = match[0];
-				this.options.end   = match[0];
+				this.options.start = Number(match[0]);
+				this.options.end   = Number(match[0]);
 			}
 			else if(/^$/.test(options))
 			{

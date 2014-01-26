@@ -9,22 +9,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title></title>
 
-	<script type="text/javascript" src="../../../ajax/ecl.js"></script>
-	<script type="text/javascript" src="../../../ajax/string.js"></script>
-	<script type="text/javascript" src="../../../ajax/vendor/jquery-1.8.3.min.js"></script>
-	<script type="text/javascript" src="../../../ajax/ajax.js"></script> <!-- Ajax -->
-	<script type="text/javascript" src="../../../ajax/ajaxlib.js"></script> <!-- Ajax -->
-	<script type="text/javascript" src="../../../ajax/cookie.js"></script> <!-- Ajax -->
-	<script type="text/javascript" src="../../../ajax/2chbbsajax.js"></script> <!-- Ajax -->
-	<link rel="stylesheet" type="text/css" href="../../../ajax/read.css" media="screen">
+	<script type="text/javascript" src="ajax/ecl.js"></script>
+	<script type="text/javascript" src="ajax/string.js"></script>
+	<script type="text/javascript" src="ajax/vendor/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="ajax/ajax.js"></script> <!-- Ajax -->
+	<script type="text/javascript" src="ajax/cookie.js"></script> <!-- Ajax -->
+	<script type="text/javascript" src="ajax/2chbbsajax.js"></script> <!-- Ajax -->
+	<link rel="stylesheet" type="text/css" href="ajax/read.css" media="screen">
 
 </head>
 <body>
 <script type="text/javascript">
 <!--
 $(window).ready(function () {
-	var thisFile = window.location.pathname.match(/^.*\/test\/read.html/);
-	var pathstr = window.location.pathname.replace(thisFile, "");
+	var pathstr = window.location.hash.substr(2);
 	
 	new BBSThread(pathstr);
 });
@@ -35,7 +33,7 @@ $(window).ready(function () {
 <span class="headlist">
 【<a href="">BBS2ch</a>】</span>
 <span style="float:left;"><a href="#footer">↓</a>
-<a href="/:bbs/index.html";'>掲示板に戻る</a> <a href="/:bbs/:key/">全部</a> <a href="/:bbs/:key/|50");'>最新50</a>
+<a href="#!/:bbs/index.html";'>掲示板に戻る</a> <a href="#!/:bbs/:key/">全部</a> <a href="#!/:bbs/:key/|50");'>最新50</a>
 </span>
 <br style="clear:both;">
 </div>
@@ -46,7 +44,7 @@ $(window).ready(function () {
 <font color="red" face="Arial"><b id="size"></b></font> <span id="speed" title="勢いは一日あたりのレス数の目安です。(勢い=レス数÷スレが立ってからの分数×60×24)" style="font-family:Arial;color:green;"></span>&nbsp;&nbsp;
 
 <div id="footer">
-<hr class="footer"><a href="#header">↑</a> <a href="/:bbs/index.html";'>掲示板に戻る</a> <a href="/:bbs/:key/">全部</a> <a href="/:bbs/:key/:pastfrom-:pastto">前100</a> <a href="/:bbs/:key/:nextfrom-:nextto">次100</a> <a href="/:bbs/:key/|50");'>最新50</a>
+<hr class="footer"><a href="#header">↑</a> <a href="#!/:bbs/index.html";'>掲示板に戻る</a> <a href="#!/:bbs/:key/">全部</a> <a href="#!/:bbs/:key/:pastfrom-:pastto">前100</a> <a href="#!/:bbs/:key/:nextfrom-:nextto">次100</a> <a href="#!/:bbs/:key/|50");'>最新50</a>
 <a href="/:reload">新着レスを表示</a>
 <hr size="1" class="footer">
 </div>

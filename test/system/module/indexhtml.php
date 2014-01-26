@@ -35,6 +35,8 @@
 			$php_mode = (($setting->BBS_READ_SCRIPT != null) && 
 				$setting->BBS_READ_SCRIPT == "php") ? true : false;
 			if($php_mode) { $ext = "cgi"; } else { $ext = "html"; }
+			$basepath = ($ext == "html") ?
+				"read.html#!/{$setting->bbs}/" : "read.{$ext}/{$setting->bbs}/";
 
 			$output = new BBSOutPutStream();
 			
@@ -56,7 +58,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
 <meta http-equiv="Content-Style-type" content="text/css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<base href="{$baseurl}/read.{$ext}/{$setting->bbs}/">
+<base href="{$baseurl}/">
 <style>
 body,td,a,p,.h{
 	font-family:arial,sans-serif;
@@ -206,7 +208,7 @@ EOM
 				$key = preg_replace('/\.dat/', '', $key);
 
 				$output->PrintStr(<<<EOM
-			<div class="thread"><a href="{$key}/|50">{$title}</a></div>
+			<div class="thread"><a href="{$basepath}{$key}/|50">{$title}</a></div>
 
 EOM
 				);
