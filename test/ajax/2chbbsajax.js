@@ -92,7 +92,8 @@
 	Rooter.dispatch = function (thread, paths) {
 		var	bbs = paths[1],
 			key = paths[2],
-			options = paths[3] || "";
+			options = paths[3] || "",
+			anchor = paths[4] && /^!(.+)/.test(paths[4]) && paths[4].substr(1) || "";
 		
 		if(thread.bbs != bbs || thread.key != key) thread.datdata.init();
 		
@@ -103,6 +104,7 @@
 			this.terminateLoadingView();
 			this.parseOptions(decodeURIComponent(options));
 			this.render();
+			if(anchor) this.moveToAnchor(anchor);
 		}, function () {
 			if(this.requestcomp == false)
 			{
@@ -236,6 +238,20 @@
 				window.location.hash = "#!/" + bbs + "/" + key + "/" + options;
 				Rooter.dispatch(self, ["", bbs, key, options]);
 			}
+			else if(path === "#")
+			{
+				e.preventDefault();
+			}
+			else if((m = path.match(/^#(.+)/)))
+			{
+				e.preventDefault();
+				if(typeof self.orgOptions === "undefined") return;
+				var bbs = self.bbs,
+					key = self.key,
+					options = self.orgOptions || ":";
+				window.location.hash = "#!/" + bbs + "/" + key + "/" + options + "/!" + m[1];
+				Rooter.dispatch(self, ["", bbs, key, options, "!" + m[1]]);
+			}
 		});
 	}
 	
@@ -245,6 +261,11 @@
 			else if(document.getElementById) return (e.originalEvent.keyCode) ? e.originalEvent.keyCode : e.originalEvent.charCode;
 			else if(document.layers) return e.originalEvent.which;
 			else return 0;
+		};
+		p.moveToAnchor = function (id) {
+			if($("#" + id).length === 0) return;
+			var p = $("#" + id).offset().top;
+			$("html, body").animate({ scrollTop: p }, "fast");
 		};
 		p.createDatURL = function () {
 			return (this.urlbase + this.bbs + "/dat/" + this.key + ".dat?" + (new Date()).getTime());
@@ -393,7 +414,7 @@
 		};
 		p.parseOptions = function(options) {
 			var reslines = this.datdata.data.getResLines();
-			
+			this.orgOptions = options;
 			this.options = {};
 			
 			if(/^\|(\d+)n?$/.test(options))
@@ -482,7 +503,7 @@
 				this.options.start = Number(match[0]);
 				this.options.end   = Number(match[0]);
 			}
-			else if(/^$/.test(options))
+			else if(/^:?$/.test(options))
 			{
 				this.options.first = false;
 				this.options.start = 1;
