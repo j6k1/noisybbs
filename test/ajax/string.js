@@ -53,8 +53,9 @@
 			mail: fields[1],
 			dateid: fields[2],
 			body: fields[3].replace(
-				/((https?:)(\/\/[-_.!~*\'()a-zA-Z0-9;?:\@&=+\$,%#]+))[-_.!~*\'()a-zA-Z0-9;\/?:|\@&=+\$,%#]+/g,
-				function (url) {
+				/(<[^>]*>)(((https?:)(\/\/[-_.!~*\'()a-zA-Z0-9;?:\@&=+\$,%#]+))[-_.!~*\'()a-zA-Z0-9;\/?:|\@&=+\$,%#]+)/g,
+				function (tag, url) {
+					if(tag) return tag;
 					url = url.replace(/&/g, "&amp;");
 					return '<a href="' + url + '">' + url + '</a>';
 				})
