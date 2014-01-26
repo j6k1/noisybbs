@@ -270,6 +270,12 @@
 			});
 		};
 		p.postRes = function () {
+			if(this.requestcomp == false)
+			{
+				window.alert("í êMíÜÇ≈Ç∑...");
+				return false;
+			}
+			
 			var self = this;
 			var params = $("#resparams");
 		
@@ -315,6 +321,13 @@
 			this.loadThread(function () {
 				this.terminateLoadingView();
 				this.render();
+			}, function () {
+				if(this.requestcomp == false)
+				{
+					window.alert("í êMíÜÇ≈Ç∑...");
+					return false;
+				}
+				return true;
 			});
 		};
 		p.startLoadingView = function () {
