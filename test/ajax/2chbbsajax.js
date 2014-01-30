@@ -180,7 +180,7 @@
 		this.startLoadingView();
 		Rooter.dispatch(this, paths.split("/"));
 		
-		$("a").click(function (e) {
+		$("body").on("click", "a", function (e) {
 			var m,
 				path = Rooter.readPath(
 					this.getAttribute && this.getAttribute("href", 2) || $(this).attr("href")
