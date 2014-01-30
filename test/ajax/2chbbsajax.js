@@ -183,7 +183,7 @@
 		$("a").click(function (e) {
 			var m,
 				path = Rooter.readPath(
-					$(this).get(0).getAttribute && $(this).get(0).getAttribute("href", 2) || $(this).attr("href")
+					this.getAttribute && this.getAttribute("href", 2) || $(this).attr("href")
 				);
 
 			if(path === "/:reload")
