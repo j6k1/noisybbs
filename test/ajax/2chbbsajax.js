@@ -309,7 +309,7 @@
 			$("body").append(wnd);
 			$("#response-html").html(m[1]);
 			$("body").append(wnd);
-			var x = ($("#message").width() - wnd.width()) / 2;
+			var x = ($("#message").css("width") - wnd.width()) / 2;
 			var y = ($(window).height() - wnd.height()) / 2;
 			var h = wnd.height();
 			wnd.css({
@@ -447,7 +447,7 @@
 					suka: params.find("input[name='suka']").val()
 				},
 				headers: {
-					"Referer": this.urlbase + "/" + this.bbs + "/",
+					//"Referer": this.urlbase + "/" + this.bbs + "/",
 					"Content-Type": "application/x-www-form-urlencoded"
 				},
 				encoder: EscapeSJIS

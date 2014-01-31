@@ -3,11 +3,13 @@ var Cookie = (function () {
 	};
 
 	(function () {
+		Cookie.values = {};
+		if(!document.cookie) return;
+		
 		var cookies = document.cookie;
 		
 		cookies = cookies.split(";");
 		
-		Cookie.values = {};
 		
 		for(var i=0, len = cookies.length ; i < len; i++)
 		{
