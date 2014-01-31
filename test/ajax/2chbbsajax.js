@@ -337,7 +337,7 @@
 					var onKeyDown = function (e) {
 						var key = self.keyCode(e);
 						
-						if(key === 13 && self.shiftkey)
+						if(key === 13)
 						{
 							e.preventDefault();
 							self.closeResponseWindow();
