@@ -323,7 +323,7 @@
 			var frame = 0;
 			
 			requestAnimationFrame(function enterFrame () {
-				frame+=6;
+				frame+=10;
 				wnd.css({
 					top: ((y + h / 2) - (h / 2 / (60 / frame)) + "px"),
 					height: (h * (frame / 60)) + "px"
@@ -370,7 +370,7 @@
 			var h = wnd.height();
 			var frame = 60;
 			requestAnimationFrame(function enterFrame() {
-				frame-=6;
+				frame-=10;
 				wnd.css({
 					top: ((y + h / 2) - (h / 2 / (60 / frame)) + "px"),
 					height: (h * (frame / 60)) + "px"
