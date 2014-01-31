@@ -302,6 +302,92 @@
 		p.createPostURL = function () {
 			return (this.urlbase + "test/bbs.cgi?guid=On");
 		};
+		p.openResponseWindow = function (message) {
+			var self = this;
+			var wnd = $($("#response-window-template").html());
+			var m = message.match(/<body[^>]*>((.|\n|\r)*?)<\/body>/);
+			$("body").append(wnd);
+			$("#response-html").html(m[1]);
+			$("body").append(wnd);
+			var x = ($("#message").width() - wnd.width()) / 2;
+			var y = ($(window).height() - wnd.height()) / 2;
+			var h = wnd.height();
+			wnd.css({
+				left: x,
+				top: y
+			});
+			wnd.css("height", "0px");
+			wnd.css("top", (y + h / 2) + "px");
+			wnd.css("display", "block");
+			
+			var frame = 0;
+			
+			requestAnimationFrame(function enterFrame () {
+				frame+=6;
+				wnd.css({
+					top: ((y + h / 2) - (h / 2 / (60 / frame)) + "px"),
+					height: (h * (frame / 60)) + "px"
+				});
+
+				if(frame == 60)
+				{
+					$("#response-window-close").on("click", function (e) {
+						self.closeResponseWindow();
+					});
+					var onKeyDown = function (e) {
+						var key = self.keyCode(e);
+						
+						if(key === 13 && self.shiftkey)
+						{
+							e.preventDefault();
+							self.closeResponseWindow();
+						}
+					};
+					
+					if(window.opera)
+					{
+						$(window).one("keypress", function (e) {
+							return onKeyDown(e);
+						});
+					}
+					else
+					{
+						$(window).one("keydown", function (e) {
+							return onKeyDown(e);
+						});
+					}
+				}
+				else
+				{
+					requestAnimationFrame(enterFrame);
+				}
+			});
+		};
+		p.closeResponseWindow = function () {
+			var wnd = $("#response-window");
+			var x = ($("#message").width() - wnd.width()) / 2;
+			var y = ($(window).height() - wnd.height()) / 2;
+			var h = wnd.height();
+			var frame = 60;
+			requestAnimationFrame(function enterFrame() {
+				frame-=6;
+				wnd.css({
+					top: ((y + h / 2) - (h / 2 / (60 / frame)) + "px"),
+					height: (h * (frame / 60)) + "px"
+				});
+
+				if(frame == 0)
+				{
+					$("#response-window").css("display", "none");
+					$("#response-window").remove();
+					$("#response-window").empty();
+				}
+				else
+				{
+					requestAnimationFrame(enterFrame);
+				}
+			});
+		};
 		p.loadThread = function (callback, beforeLoad) {
 			if(beforeLoad && !beforeLoad.call(this)) return;
 			
@@ -338,8 +424,7 @@
 					var params = $("#resparams");
 					if( (status == 200) && (/<!-- 2ch_X:error -->/.test(data)) )
 					{
-						msgwindow = window.open();
-						msgwindow.document.write(data);
+						self.openResponseWindow(data);
 					}
 					params.find("#message").val("");
 					

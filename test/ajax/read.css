@@ -1,3 +1,7 @@
+html, body {
+	height: 100%;
+	width: auto;
+}
 body{
 	background-color:#ffffee;
 	color:#443333;
@@ -6,6 +10,7 @@ body{
 	background-position: right bottom;
 	/* background-image:url('./dora.gif'); */
 	word-break: break-all;
+	overflow: hidden;
 }
 @media screen and (max-width: 320px) {
     body {
@@ -45,6 +50,13 @@ a:visited{
 @media screen and (max-width: 320px) {
 	#message {
 		width: 300px;
+	}
+	#response-window {
+		width: 300px;
+		font-size: 11px;
+	}
+	#response-window-footer {
+		width: 290px;
 	}
 	#e-mail {
 		width: 75px;
@@ -87,4 +99,41 @@ span.info{
 }
 span.headlist{
 	font-size:80%;
+}
+#response-window {
+	position: fixed;
+	top: 0px;
+	width: 500px;
+	height: auto;
+	border-radius: 5px 5px 5px 5px;
+	padding: 20px 5px 10px 5px;
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
+	background-color: white;
+	overflow: hidden;
+	display: none;
+}
+#response-window-html {
+	position: relative;
+	width: 280px;
+	height: auto;
+	padding: 0px 5px 0px 5px;
+	border-bottom-style: solid;
+	border-bottom-color: black;
+	border-bottom-width: 1px;
+}
+#response-window-footer {
+	position: relative;
+	width: 490px;
+	height: 12px;
+}
+#response-window-close {
+	position: absolute;
+	top: 6px;
+	right: 0px;
+	margin: -0.5em 0px 0px 0px;
+	width: 36px;
+	height: 12px;
+	cursor: pointer;
 }
