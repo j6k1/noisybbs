@@ -158,10 +158,11 @@
 	function BBSThread (paths) {
 		this.requestcomp = true;
 		this.shiftkey = false;
-
-		var match = window.location.pathname.match(/^.*(\/test\/read.html)/g);
 		
-		this.urlbase = match[0].replace("test/read.html", "");
+		var span = document.createElement("span");
+		span.innerHTML = '<a href="../"></a>';
+		
+		this.urlbase = (span.firstChild.href + "/").replace(/\/\/$/, "/");
 		
 		var self = this;
 		
@@ -220,10 +221,14 @@
 				e.preventDefault();
 				self.reload();
 			}
-			else if((m = path.match(/^ID\/(\d+)(-\d+)?$/)))
+			else if((m = path.match(/^ID\/((\d+)(-\d+)?)$/)))
 			{
 				e.preventDefault();
-				if(!m[2]) window.location.hash = "a" + m[1];
+				var bbs = self.bbs,
+					key = self.key,
+					options = m[1];
+				window.location.hash = "#!/" + bbs + "/" + key + "/" + options;
+				Rooter.dispatch(self, ["", bbs, key, options]);
 			}
 			else if((m = path.match(/^\/(:bbs)\/index.html$/)))
 			{

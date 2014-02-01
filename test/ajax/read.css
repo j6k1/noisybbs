@@ -29,14 +29,17 @@ body.ie {
     }
 }
 a:link{
+	font-weight: normal;
 	color: #0000FF;
 	text-decoration:none;
 }
 a:hover{
+	font-weight: normal;
 	color: #FF0000;
 	text-decoration:underline;
 }
 a:visited{
+	font-weight: normal;
 	color: purple;
 }
 #header{
@@ -56,6 +59,7 @@ a:visited{
 	width: 260px;
 }
 #message {
+	margin-top: 8px;
 	width: 600px;
 }
 #response-window-wrapper {
