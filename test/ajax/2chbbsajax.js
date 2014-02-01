@@ -521,7 +521,7 @@
 				subject = 'スレタイ不明';
 			}
 			
-			$("title").html(subject);
+			document.title = subject;
 			$("#subject").html(subject);
 			var date = new Date();
 			var speed = (lines.length - 1) / (Math.floor(date.getTime() / 60000) - Math.floor(this.key / 60)) * 60 * 24;
