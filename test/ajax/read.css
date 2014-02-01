@@ -1,6 +1,13 @@
-html, body {
-	height: 100%;
+html {
 	width: auto;
+	height: auto;
+}
+body {
+	width: auto;
+	height: 100%;
+}
+body.ie, body.ie6 {
+	height: auto;
 }
 body{
 	background-color:#ffffee;
@@ -11,7 +18,10 @@ body{
 	/* background-image:url('./dora.gif'); */
 	word-break: break-all;
 	position: relative;
-	overflow: hidden;
+	overflow: auto;
+}
+body.ie {
+	overflow: visible;
 }
 @media screen and (max-width: 400px) {
     body {
@@ -48,8 +58,21 @@ a:visited{
 #message {
 	width: 600px;
 }
-#response-window {
+#response-window-wrapper {
 	position: fixed;
+	top: 0px;
+	left: 0px;
+}
+body.ie6 #response-window-wrapper {
+	position: absolute;
+	top: expression(body.scrollTop);
+	left: 0px; */
+}
+#response-window-wrapper .inner {
+	position: relative;
+}
+#response-window {
+	position: absolute;
 	top: 0px;
 	width: 500px;
 	height: auto;
@@ -62,14 +85,11 @@ a:visited{
 	overflow: hidden;
 	display: none;
 }
-#response-window-html {
+#response-html {
 	position: relative;
 	width: 480px;
 	height: auto;
 	padding: 0px 5px 0px 5px;
-	border-bottom-style: solid;
-	border-bottom-color: black;
-	border-bottom-width: 1px;
 }
 #response-window-footer {
 	position: relative;
@@ -89,7 +109,7 @@ a:visited{
 	#message {
 		width: 300px;
 	}
-	#response-window {
+	#response-window > div {
 		width: 280px;
 		font-size: 11px;
 	}

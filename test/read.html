@@ -18,19 +18,45 @@
 	<link rel="stylesheet" type="text/css" href="ajax/read.css" media="screen">
 
 </head>
-<body>
+<!--[if (lte IE 9)&(gte IE 7)]>
+<script type="text/javascript">
+<body class="ie">
+</script>
+<![endif]-->
+<!--[if (lte IE 6)]>
+<script type="text/javascript">
+<body class="ie6">
+</script>
+<![endif]-->
+<script type="text/javascript">
+if(document.documentMode && document.documentMode <= 6) {
+	document.write('<body class="ie6">');
+}
+else if(document.documentMode && document.documentMode <= 9) {
+	document.write('<body class="ie">');
+}
+else if(!$("body").length)
+{
+	document.write('<body>');
+}
+</script>
+<div id="response-window-wrapper">
+	<div class="inner">
+	</div>
+</div>
 <script type="text/template" id="response-window-template">
 <div id="response-window">
 	<div id="response-html">
 	</div>
 	<div id="response-window-footer">
-	<div id="response-window-close">[Å~]</div>
+		<div id="response-window-close">[Å~]</div>
 	</div>
 </div>
 </script>
 <script type="text/javascript">
 <!--
 $(window).ready(function () {
+	if(!$("body").hasClass("ie") && $("body").hasClass("ie6")) $("html").css("height", "100%");
 	var pathstr = window.location.hash.substr(2);
 	
 	new BBSThread(pathstr);

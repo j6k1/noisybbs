@@ -304,14 +304,13 @@
 		};
 		p.openResponseWindow = function (message) {
 			var self = this;
-			var wnd = $($("#response-window-template").html());
+			$("#response-window-wrapper .inner").html($("#response-window-template").html());
+			var wnd = $("#response-window");
 			var m = message.match(/<body[^>]*>((.|\n|\r)*?)<\/body>/);
-			$("body").append(wnd);
 			$("#response-html").html(m[1]);
-			$("body").append(wnd);
-			var x = ($("#message").css("width") - wnd.width()) / 2;
-			var y = ($(window).height() - wnd.height()) / 2;
-			var h = wnd.height();
+			var x = ($("#message").width() - wnd.width()) / 2;
+			var y = ($("html").height() - ($("body").hasClass("ie6") ? wnd.innerHeight() : wnd.height())) / 2;
+			var h = $("body").hasClass("ie6") ? wnd.innerHeight() : wnd.height();
 			wnd.css({
 				left: x,
 				top: y
@@ -325,6 +324,7 @@
 			requestAnimationFrame(function enterFrame () {
 				frame+=10;
 				wnd.css({
+					left: x,
 					top: ((y + h / 2) - (h / 2 / (60 / frame)) + "px"),
 					height: (h * (frame / 60)) + "px"
 				});
@@ -346,13 +346,13 @@
 					
 					if(window.opera)
 					{
-						$(window).one("keypress", function (e) {
+						$(document).one("keypress", function (e) {
 							return onKeyDown(e);
 						});
 					}
 					else
 					{
-						$(window).one("keydown", function (e) {
+						$(document).one("keydown", function (e) {
 							return onKeyDown(e);
 						});
 					}
