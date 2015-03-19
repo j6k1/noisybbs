@@ -58,7 +58,10 @@
 					if(tag) return tag;
 					url = url.replace(/&/g, "&amp;");
 					return '<a href="' + url + '">' + url + '</a>';
-				})
+				}
+			).replace(/&gt;&gt;((\d+)(\-\d+)?)/, function (m, m1, m2, m3) {
+				return '<a href="ID/' + m1 + '">' + m + '</a>';
+			})
 		});
 	};
 	
