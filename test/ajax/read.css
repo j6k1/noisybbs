@@ -1,3 +1,7 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
 html {
 	width: auto;
 	height: auto;
@@ -51,6 +55,12 @@ a:visited{
 }
 #subject{
 
+}
+#footer, #resparams, #size {
+	margin: 10px;
+}
+#footer > hr {
+	margin: 5px 0px 5px 0px;
 }
 #e-mail {
 	width: 200px;
@@ -135,6 +145,10 @@ body.ie6 #response-window-wrapper {
 	#footer {
 		font-size: 90%; 
 	}
+	#resbodys dd {
+		-webkit-margin-start: 0px;
+		padding: 0px 10px 0px 10px;
+	}
 }
 img{
 	border:none;
@@ -156,8 +170,11 @@ dt {
 dd {
 	/*margin: 2px 0 18px 3em;*/
 	margin-bottom:18px;
+	padding-left: 40px;
 }
-
+dt, h1 {
+	padding-left: 10px;
+}
 span.name{
 	color: green;
 }
