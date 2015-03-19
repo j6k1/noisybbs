@@ -19,7 +19,8 @@
 	};
 	(function (p) {
 		p.getResponseHeader = function (name) {
-			if(this.xhr.getAllResponseHeaders().match(name))
+			
+			if(this.xhr.getAllResponseHeaders().match(RegExp(name.toLowerCase().replace("-", "\\-"), "i")))
 			{
 				return this.xhr.getResponseHeader(name);
 			}
