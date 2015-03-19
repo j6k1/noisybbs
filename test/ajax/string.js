@@ -46,7 +46,7 @@
 		
 		return String.fromTemplate(
 			'<dt id="a{num}">{num} F <span class="name"><b>{name}</b></span> <span class="info">[{mail}] F {dateid}</span></dt>',
-			'<dd>{body}</dd>',
+			'<dd><div id="thumbnails-{num}" class="thumbnails"><div class="thumbnails-tail" style="clear:both;"></div></div>{body}</dd>',
 		{
 			num: num,
 			name: fields[0],
@@ -56,8 +56,23 @@
 				/(<[^>]*>)|(((https?:)(\/\/[-_.!~*\'()a-zA-Z0-9;?:\@&=+\$,%#]+))[-_.!~*\'()a-zA-Z0-9;\/?:|\@&=+\$,%#]+)/g,
 				function (str, tag, url) {
 					if(tag) return tag;
+					
+					var img = new Image();
+					
 					url = url.replace(/&/g, "&amp;");
-					return '<a href="' + url + '">' + url + '</a>';
+
+					img.onload = function () {
+						$("#thumbnails-" + num + " .thumbnails-tail").before($("<a/>").attr({
+							"href": url,
+							"target": "__blank"
+						}).append($("<img/>").attr({
+							"src": url
+						})));
+					};
+					
+					img.src = url;
+					
+					return '<a href="' + url + '" target="__blank">' + url + '</a>';
 				}
 			).replace(/&gt;&gt;((\d+)(\-\d+)?)/, function (m, m1, m2, m3) {
 				return '<a href="ID/' + m1 + '">' + m + '</a>';

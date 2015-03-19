@@ -56,6 +56,16 @@ a:visited{
 #subject{
 
 }
+#resbodys .thumbnails {
+	margin-left: -10px;
+	width: 100%;
+}
+#resbodys .thumbnails img {
+	max-width: 300px;
+	max-height: 400px;
+	float: left;
+	margin-left: 10px;
+}
 #footer, #resparams, #size {
 	margin: 10px;
 }
