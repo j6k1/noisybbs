@@ -409,17 +409,32 @@ body {
 	background-color: <?php echo Util::valid_css_color_val($setting->BBS_BG_COLOR); ?>;
 }
 #container {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
 	width: 800px;
+	padding: 10px;
 }
 #box {
 	width: 700px;
 }
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 799px) {
 	#container {
-		width: 630px;
+		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-o-box-sizing: border-box;
+		width: 100%;
+		padding: 10px;
 	}
 	#box {
-		width: 550px;
+		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-o-box-sizing: border-box;
+		width: 100%;
+		padding: 0px 10px 0px 10px;
 	}
 }
 a:link {
