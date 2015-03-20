@@ -150,13 +150,18 @@ a:hover {
 #copyright {
 	font-size: 12px;
 }
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 640px) {
     body {
-    	width: 300px;
+    	box-sizing: border-box;
+    	-webkit-box-sizing: border-box;
+    	-moz-box-sizing: border-box;
+    	-o-box-sizing: border-box;
+    	width: 100%;
+    	padding: 0px 10px 0px 10px;
 		font-size: 14px;
 	}
     #container {
-    	width: 300px;
+    	width: 100%;
 	}
 	#listhtml{
 		font-size: 12px;
@@ -172,8 +177,13 @@ a:hover {
 		font-size: 12px;
 	}
 	#post-title{
+    	box-sizing: border-box;
+    	-webkit-box-sizing: border-box;
+    	-moz-box-sizing: border-box;
+    	-o-box-sizing: border-box;
 		margin-left: 3px;
-    	width: 230px;
+    	width: 100%;
+    	padding-right: 70px;
 	}
 	#e-mail {
 		width: 75px;
@@ -182,7 +192,7 @@ a:hover {
 		width: 90px;
 	}
 	#message {
-		width: 300px;
+		width: 100%;
 	}
 }
 </style>
