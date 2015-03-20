@@ -60,6 +60,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <base href="{$baseurl}/">
 <style>
+* {
+	margin: 0;
+	padding: 0;
+}
 body,td,a,p,.h{
 	font-family:arial,sans-serif;
 	background-color: {$BBS_BG_COLOR};
@@ -71,13 +75,23 @@ body{
 #title{
 	font-size: 32px;
 	padding-bottom: 20px;
+	margin: 4px;
 	background-image: url('{$BBS_TITLE_PICTURE}');
 	color: {$BBS_TITLE_COLOR}
 }
 #container {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
 	width: 640px;
+   	padding: 0px 10px 0px 10px;
 }
 #summary{
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
 	padding: 4px;
 	text-align: left;
 	border-color: black;
@@ -113,20 +127,24 @@ body{
 #navigate{
 	margin-top: 20px;
 }
-#post-title{
-	width: 400px;
-}
 #message {
 	width: 600px;
+	padding: 4px 0px 4px 0px;
 }
 #post-title{
-    	width: 380px;
+    width: 380px;
+    margin: 4px;
 }
 #e-mail {
 	width: 200px;
+    margin: 4px;
 }
 #name {
 	width: 260px;
+	padding: 4px 0px 4px 0px;
+}
+#form input {
+	margin: 4px 0px 4px 0px;
 }
 div.thread{
 	text-align: center;
@@ -149,6 +167,7 @@ a:hover {
 }
 #copyright {
 	font-size: 12px;
+    margin: 10px;
 }
 @media screen and (max-width: 640px) {
     body {
@@ -157,11 +176,15 @@ a:hover {
     	-moz-box-sizing: border-box;
     	-o-box-sizing: border-box;
     	width: 100%;
-    	padding: 0px 10px 0px 10px;
 		font-size: 14px;
 	}
     #container {
+    	box-sizing: border-box;
+    	-webkit-box-sizing: border-box;
+    	-moz-box-sizing: border-box;
+    	-o-box-sizing: border-box;
     	width: 100%;
+    	padding: 0px 10px 0px 10px;
 	}
 	#listhtml{
 		font-size: 12px;
@@ -181,7 +204,7 @@ a:hover {
     	-webkit-box-sizing: border-box;
     	-moz-box-sizing: border-box;
     	-o-box-sizing: border-box;
-		margin-left: 3px;
+		padding-left: 3px;
     	width: 100%;
     	padding-right: 70px;
 	}
@@ -192,6 +215,10 @@ a:hover {
 		width: 90px;
 	}
 	#message {
+		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-o-box-sizing: border-box;
 		width: 100%;
 	}
 }
