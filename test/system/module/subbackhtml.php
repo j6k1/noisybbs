@@ -62,7 +62,7 @@ EOM;
 			}
 			
 			$html .= <<<EOM
-<span style="font-size : 12px;"><b><a href="../../kako.php/{$setting->bbs}">過去ログ倉庫</a></b></span>
+<span style="font-size : 12px;"><b><a href="../../test/kako.php/{$setting->bbs}">過去ログ倉庫</a></b></span>
 </div>
 </body>
 </html>
